@@ -17,12 +17,11 @@ class Player:
         self.rect.x = x_initial
         self.rect.y = y_initial
         
-    def move(self, direction, game_field):
+    def move(self, direction):
         if direction == "right":
             self.rect.x += 1
         else:
             self.rect.x -= 1
-        self.rect.y = game_field.rect.y
         
     def getDamage(self, weapon_damage):
         self.health -= weapon_damage
