@@ -22,9 +22,11 @@ background = pygame.image.load("Sprites/background.png").convert()
 player_1 = player.Player("Sprites/fox_1.png", random.randint(50, 150), 100)
 player_2 = player.Player("Sprites/fox_2.png", random.randint(650, 750), 100)
 
-player_group = pygame.sprite.Group()
-player_group.add(player_1)
-player_group.add(player_2)
+player_group1 = pygame.sprite.Group()
+player_group1.add(player_1)
+
+player_group2 = pygame.sprite.Group()
+player_group2.add(player_2)
 
 # ===============   LOOPING PRINCIPAL   ===============
 relogio = pygame.time.Clock()
@@ -38,50 +40,53 @@ while running:
         if event.type == QUIT:      
             running = False 
     
-    pressed_keys = pygame.key.get_pressed()
+
     if turn % 2 == 0: #Player_2 Turn
-        while not pressed_keys[K_SPACE]:
+        launched = False
+        projectile = projectile_class.Ball((1664, 1040), "Sprites/pokeball.png",
+                                           player_2.rect.x, player_2.rect.y)
+        while not launched:
+            pressed_keys = pygame.key.get_pressed()
             if pressed_keys[K_a]:
                 player_2.move("left")
             elif pressed_keys[K_d]:
                 player_2.move("right")
-            projectile = projectile_class.Ball((1664, 1040), "Sprites/pokeball.png",
-                                           player_2.rect.x, player_2.rect.y)
-            if pressed_keys[K_q]:
-                projectile.speed -= 5
-            elif pressed_keys[K_e]:
-                projectile.speed += 5
-            elif pressed_keys[K_w]:
-                projectile.angle += 5
-            elif pressed_keys[K_s]:
-                projectile.angle -= 5
                 
-        projectile.moving = True
-        projectile.move()
+            projectile.update()
+            if projectile.moving == True:
+               launched = True
+               
+            screen.blit(background, (0, 0))
+            player_group1.draw(screen)
+            player_group2.draw(screen)
+            pygame.display.update()
         
     elif turn % 2 == 1: #Player_1 Turn
-        while not pressed_keys[K_SPACE]:
+        launched = False
+        projectile = projectile_class.Ball((1664, 1040), "Sprites/pokeball.png",
+                                           player_2.rect.x, player_2.rect.y)
+        while not launched:
+            pressed_keys = pygame.key.get_pressed()
             if pressed_keys[K_a]:
                 player_1.move("left")
             elif pressed_keys[K_d]:
                 player_1.move("right")
-            projectile = projectile_class.Ball((1664, 1040), "Sprites/pokeball.png",
-                                           player_2.rect.x, player_2.rect.y)
-            if pressed_keys[K_q]:
-                projectile.speed -= 5
-            elif pressed_keys[K_e]:
-                projectile.speed += 5
-            elif pressed_keys[K_w]:
-                projectile.angle += 5
-            elif pressed_keys[K_s]:
-                projectile.angle -= 5
                 
-        projectile.moving = True
-        projectile.move()
+            projectile.update()
+            if projectile.moving == True:
+               launched = True
+               
+            screen.blit(background, (0, 0))
+            player_group1.draw(screen)
+            player_group2.draw(screen)
+            pygame.display.update()
+            
+            
         
     #Getting Responses
     screen.blit(background, (0, 0))
-    player_group.draw(screen)
+    player_group1.draw(screen)
+    player_group2.draw(screen)
     pygame.display.update()
     #mudando o turno 
     turn += 1
