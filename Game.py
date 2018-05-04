@@ -11,16 +11,16 @@ import pygame
 
 # ============= Initializing ============= 
 pygame.init()
-tela = pygame.display.set_mode((334, 151), 0, 32)
-fundo = pygame.image.load("Sprites_no_background/Background.jpg").convert()
+tela = pygame.display.set_mode((1664, 1040), 0, 32)
+fundo = pygame.image.load("Sprites/background.png").convert()
 
 pygame.display.set_caption('Worm')
 
-player_1 = player.Player("Sprites_no_background/fox_no_background1.png", 100, 100)
+player_1 = player.Player("Sprites/fox_1.png", 100, 100)
 player_1_group = pygame.sprite.Group()
 player_1_group.add(player_1)
 
-player_2 = player.Player("Sprites_no_background/fox_no_background2.png", 500, 100)
+player_2 = player.Player("Sprites/fox_2.png", 500, 100)
 player_2_group = pygame.sprite.Group()
 player_2_group.add(player_2)
 

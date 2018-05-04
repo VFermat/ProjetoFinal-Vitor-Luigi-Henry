@@ -7,11 +7,12 @@ Created on Fri Apr 27 08:29:17 2018
 
 import pygame
 
-class Player:
+class Player(pygame.sprite.Sprite):
     
     health = 100
     
     def __init__(self, sprite, x_initial, y_initial):
+        pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(sprite)
         self.rect = self.image.get_rect()
         self.rect.x = x_initial
