@@ -118,8 +118,8 @@ class Ball(pygame.sprite.Sprite):
         screen.blit(text, (0, 0))  # Sticks the text to the middle of the screen
 
     def update(self):
-        self.displayTopRight_two("Angle: {0} | Speed: {1}", ball.angle, ball.speed)
-        self.checkPressedKeys()
+        #self.displayTopRight_two("Angle: {0} | Speed: {1}", self.angle, self.speed)
+        #self.checkPressedKeys()
         self.calculateCenter()
 
         if self.moving == True:  # Checks if the ball is moving, if so:
