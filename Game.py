@@ -9,6 +9,7 @@ import projectile_class
 import player
 import pygame
 import random
+from pygame.locals import *
 
 # ============= Initializing ============= 
 pygame.init()
@@ -16,7 +17,7 @@ pygame.init()
 screen = pygame.display.set_mode((1664, 1040), 0, 32)
 pygame.display.set_caption("WOOOORMS")
 
-background = pygame.image.load("Sprite/background.png").convert()
+background = pygame.image.load("Sprites/background.png").convert()
 
 player_1 = player.Player("Sprites/fox_1.png", random.randint(50, 150), 100)
 player_2 = player.Player("Sprites/fox_2.png", random.randint(650, 750), 100)
