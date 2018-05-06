@@ -1,98 +1,132 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu May  3 21:59:22 2018
+Created on Thu May 3 2018
 
-@author: Vitor Eller
+@author: Henry Rocha, Vitor Eller, Luigi Portugal
 """
 
-import projectile_class
+import projectile
 import player
 import pygame
 import random
 from pygame.locals import *
 
-# ============= Initializing ============= 
+import os  # Import needed to center PyGame's window
+os.environ['SDL_VIDEO_CENTERED'] = '1'  # Code to center PyGame window on the screen
+
+
+def displayTopRight_two(text, variable1, variable2):
+    font = pygame.font.SysFont("None", 36)  # Declares the font to be used by the text
+    text = font.render(text.format(variable1, variable2), True, (255, 255, 255))  # Renders the text by the font chosen before
+    text_posX, text_posY, text_lenght, text_height = text.get_rect()  # Gets dimensions of the text
+    screen.blit(text, (0, 0))  # Sticks the text to the middle of the screen
+
+
+def checkPressedKeys(event):
+    if event.key == pygame.K_UP:
+        if projectile.moving == False:  # Checks is the ball is moving, if not:
+            projectile.angle += 1  # Adds to the ball angle
+            if projectile.angle >= 360:  # Limits the angle to a maximum of 180
+                projectile.angle = 360
+
+
+# ============= Initializing =============
+# PyGame initialization:
 pygame.init()
+pygame.font.init()
+pygame.display.set_caption("Foxes")
 
-screen = pygame.display.set_mode((1664, 1040), 0, 32)
-pygame.display.set_caption("WOOOORMS")
+# Screen settings:
+screen_width, screen_height = 832, 520
+screen_size = (screen_width, screen_height)
+screen = pygame.display.set_mode((screen_width, screen_height), 0, 32)
 
-background = pygame.image.load("Sprites/background.png").convert()
+# Setting up FPS:
+clock = pygame.time.Clock()
+framesPerSecond = 60
 
-player_1 = player.Player("Sprites/fox_1.png", random.randint(50, 150), 100)
-player_2 = player.Player("Sprites/fox_2.png", random.randint(650, 750), 100)
+# Background settings:
+background = pygame.image.load("Sprites/bg_mountains_832x520.png").convert()
 
-player_group1 = pygame.sprite.Group()
-player_group1.add(player_1)
+# Player settings:
+player_red = player.Player("Sprites/fox_1.png", random.randint(50, 150), 490)
+player_yellow = player.Player("Sprites/fox_2.png", random.randint(650, 750), 490)
 
-player_group2 = pygame.sprite.Group()
-player_group2.add(player_2)
+player_group = pygame.sprite.Group()
+player_group.add(player_red)
+player_group.add(player_yellow)
+
+# Projectile settings:
+projectile = projectile.Projectile(screen_size, "Sprites/pokeball.png",
+                                   0, 0)
+projectile_group = pygame.sprite.Group()
+projectile_group.add(projectile)
+
+# Variables:
+playerTurn = "red"
 
 # ===============   LOOPING PRINCIPAL   ===============
-relogio = pygame.time.Clock()
-
 running = True
-turn = 1
-
 while running:
-    
-    for event in pygame.event.get():  
-        if event.type == QUIT:      
-            running = False 
-    
+    # Sets game FPS:
+    time = clock.tick(framesPerSecond)
 
-    if turn % 2 == 0: #Player_2 Turn
-        launched = False
-        projectile = projectile_class.Ball((1664, 1040), "Sprites/pokeball.png",
-                                           player_2.rect.x, player_2.rect.y)
-        while not launched:
-            pressed_keys = pygame.key.get_pressed()
-            if pressed_keys[K_a]:
-                player_2.move("left")
-            elif pressed_keys[K_d]:
-                player_2.move("right")
-                
-            projectile.update()
-            if projectile.moving == True:
-               launched = True
-               
-            screen.blit(background, (0, 0))
-            player_group1.draw(screen)
-            player_group2.draw(screen)
-            pygame.display.update()
-        
-    elif turn % 2 == 1: #Player_1 Turn
-        launched = False
-        projectile = projectile_class.Ball((1664, 1040), "Sprites/pokeball.png",
-                                           player_2.rect.x, player_2.rect.y)
-        while not launched:
-            pressed_keys = pygame.key.get_pressed()
-            if pressed_keys[K_a]:
-                player_1.move("left")
-            elif pressed_keys[K_d]:
-                player_1.move("right")
-                
-            projectile.update()
-            if projectile.moving == True:
-               launched = True
-               
-            screen.blit(background, (0, 0))
-            player_group1.draw(screen)
-            player_group2.draw(screen)
-            pygame.display.update()
-            
-            
-        
-    #Getting Responses
+    # Checking for events:
+    for event in pygame.event.get():  # Loops through game events
+        if event.type == QUIT:  # If event is QUIT (Window close)
+            running = False  # Sets playing state to false, thus quitting the main loop
+        if event.type == pygame.KEYDOWN:
+            projectile.checkPressedKeys(event)
+
+            if event.key == pygame.K_g:
+                if playerTurn == "red":
+                    print("Red, Done!")
+                    done_red = True
+                    playerTurn = "yellow"
+                elif playerTurn == "yellow":
+                    print("Yellow, Done!")
+                    done_yellow = True
+                    playerTurn = "red"
+
+    # Players turn:
+    if playerTurn == "red":
+        pressed_keys = pygame.key.get_pressed()
+        if pressed_keys[K_a]:
+            player_red.move("left")
+        if pressed_keys[K_d]:
+            player_red.move("right")
+        if pressed_keys[K_SPACE]:
+            if projectile.moving == False:
+                projectile.rect.x, projectile.rect.y = player_red.rect.x, player_red.rect.y
+                projectile.startx, projectile.starty = player_red.rect.x, player_red.rect.y
+                projectile.moving = True
+
+    if playerTurn == "yellow":
+        done_yellow = False
+
+        pressed_keys = pygame.key.get_pressed()
+        if pressed_keys[K_a]:
+            player_yellow.move("left")
+        if pressed_keys[K_d]:
+            player_yellow.move("right")
+        if pressed_keys[K_SPACE]:
+            if projectile.moving == False:
+                projectile.rect.x, projectile.rect.y = player_yellow.rect.x, player_yellow.rect.y
+                projectile.startx, projectile.starty = player_yellow.rect.x, player_yellow.rect.y
+                projectile.moving = True
+
+    # Drawing stuff on the screen:
     screen.blit(background, (0, 0))
-    player_group1.draw(screen)
-    player_group2.draw(screen)
+    player_group.draw(screen)
+    displayTopRight_two("Speed: {0}, Angle: {1}", projectile.speed, projectile.angle)
+
+    # Will only draw the projectile on the screen if it is moving:
+    if projectile.moving == True:
+        projectile_group.draw(screen)
+        projectile.update()
+
+    # Updates display:
     pygame.display.update()
-    #mudando o turno 
-    turn += 1
-    
-pygame.display.quit()  
-            
-        
-                
-        
+
+# Quits the game:
+pygame.display.quit()
