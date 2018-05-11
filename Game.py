@@ -22,7 +22,7 @@ pygame.font.init()
 pygame.display.set_caption("Foxes")
 
 # Screen settings:
-screen_width, screen_height = 832, 520
+screen_width, screen_height = 1280, 640
 screen_size = (screen_width, screen_height)
 screen = pygame.display.set_mode((screen_width, screen_height), 0, 32)
 
@@ -31,11 +31,11 @@ clock = pygame.time.Clock()
 framesPerSecond = 60
 
 # Background settings:
-background = pygame.image.load("Sprites/bg_mountains_832x520.png").convert()
+background = pygame.image.load("Sprites/flat_background_1280x640.png").convert()
 
 # Player settings:
-player_1 = player.Player("Sprites/Fiona_Red_Right.png", random.randint(50, 150), 410)
-player_2 = player.Player("Sprites/Fiona_Blue_Left.png", random.randint(650, 750), 410)
+player_1 = player.Player("Sprites/Fiona_Red_Right.png", random.randint(50, 150), 490)
+player_2 = player.Player("Sprites/Fiona_Blue_Left.png", random.randint(650, 750), 490)
 
 player_group = pygame.sprite.Group()
 player_group.add(player_1)
