@@ -5,7 +5,7 @@ from pygame.locals import *
 
 class Projectile(pygame.sprite.Sprite):
 
-    def __init__(self, screen_size, imageFile, posx, posy):
+    def __init__(self, screen_size, imageFile, posx, posy, damage):
         # Sets sprite stuff:
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(imageFile)
@@ -35,6 +35,9 @@ class Projectile(pygame.sprite.Sprite):
 
         # Sets time:
         self.time = 0
+
+        # Sets projectile damage:
+        self.damage = damage
 
     def move(self):
         velocity_x = math.cos(math.radians(self.angle)) * self.speed  # Calculates Vx

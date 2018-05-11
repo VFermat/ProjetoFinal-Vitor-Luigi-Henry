@@ -42,8 +42,8 @@ player_group.add(player_red)
 player_group.add(player_yellow)
 
 # Projectile settings:
-projectile_pokeball = projectile.Projectile(screen_size, "Sprites/pokeball.png", 0, 0)
-projectile_purpleball = projectile.Projectile(screen_size, "Sprites/purple_ball_50x50.png", 0, 0)
+projectile_pokeball = projectile.Projectile(screen_size, "Sprites/pokeball.png", 0, 0, 10)
+projectile_purpleball = projectile.Projectile(screen_size, "Sprites/purple_ball_50x50.png", 0, 0, 15)
 projectile_group = pygame.sprite.Group()
 projectile_group.add(projectile_pokeball)
 
