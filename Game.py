@@ -10,7 +10,7 @@ import player
 import pygame
 import random
 from pygame.locals import *
-from Functions import displayTopRight_two
+from Functions import displayTopRight_two, reset_projectile
 
 import os  # Import needed to center PyGame's window
 os.environ['SDL_VIDEO_CENTERED'] = '1'  # Code to center PyGame window on the screen
@@ -67,15 +67,13 @@ while running:
 
             if event.key == pygame.K_1:
                 projectile = projectile_pokeball
-                if projectile_pokeball not in projectile_group:
-                    projectile_group.remove(projectile_purpleball)
-                    projectile_group.add(projectile_pokeball)
+                projectile_group.empty()
+                projectile_group.add(projectile_pokeball)
 
             if event.key == pygame.K_2:
                 projectile = projectile_purpleball
-                if projectile_purpleball not in projectile_group:
-                    projectile_group.remove(projectile_pokeball)
-                    projectile_group.add(projectile_purpleball)
+                projectile_group.empty()
+                projectile_group.add(projectile_purpleball)
 
     # Players turn:
     if playerTurn == "red":
@@ -93,7 +91,7 @@ while running:
 
         if done == False:
             if projectile.moving == False:
-                projectile = projectile_pokeball
+                projectile_group, projectile = reset_projectile(projectile_group, projectile_pokeball)
                 playerTurn = "yellow"
                 done = True
 
@@ -112,7 +110,7 @@ while running:
 
         if done == False:
             if projectile.moving == False:
-                projectile = projectile_pokeball
+                projectile_group, projectile = reset_projectile(projectile_group, projectile_pokeball)
                 playerTurn = "red"
                 done = True
 
