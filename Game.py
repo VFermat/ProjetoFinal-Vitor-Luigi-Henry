@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+1  # -*- coding: utf-8 -*-
 """
 Created on Thu May 3 2018
 
@@ -34,12 +34,12 @@ framesPerSecond = 60
 background = pygame.image.load("Sprites/bg_mountains_832x520.png").convert()
 
 # Player settings:
-player_red = player.Player("Sprites/Fiona_Red_Right.png", random.randint(50, 150), 410)
-player_yellow = player.Player("Sprites/Fiona_Blue_Left.png", random.randint(650, 750), 410)
+player_1 = player.Player("Sprites/Fiona_Red_Right.png", random.randint(50, 150), 410)
+player_2 = player.Player("Sprites/Fiona_Blue_Left.png", random.randint(650, 750), 410)
 
 player_group = pygame.sprite.Group()
-player_group.add(player_red)
-player_group.add(player_yellow)
+player_group.add(player_1)
+player_group.add(player_2)
 
 # Projectile settings:
 projectile_pokeball = projectile.Projectile(screen_size, "Sprites/pokeball.png", 0, 0, 10)
@@ -79,13 +79,13 @@ while running:
     if playerTurn == "red":
         pressed_keys = pygame.key.get_pressed()
         if pressed_keys[K_a]:
-            player_red.move("left")
+            player_1.move("left")
         if pressed_keys[K_d]:
-            player_red.move("right")
+            player_1.move("right")
         if pressed_keys[K_SPACE]:
             if projectile.moving == False:
-                projectile.rect.x, projectile.rect.y = player_red.rect.x, player_red.rect.y
-                projectile.startx, projectile.starty = player_red.rect.x, player_red.rect.y
+                projectile.rect.x, projectile.rect.y = player_1.rect.x, player_1.rect.y
+                projectile.startx, projectile.starty = player_1.rect.x, player_1.rect.y
                 projectile.moving = True
                 done = False
 
@@ -98,13 +98,13 @@ while running:
     if playerTurn == "yellow":
         pressed_keys = pygame.key.get_pressed()
         if pressed_keys[K_a]:
-            player_yellow.move("left")
+            player_2.move("left")
         if pressed_keys[K_d]:
-            player_yellow.move("right")
+            player_2.move("right")
         if pressed_keys[K_SPACE]:
             if projectile.moving == False:
-                projectile.rect.x, projectile.rect.y = player_yellow.rect.x, player_yellow.rect.y
-                projectile.startx, projectile.starty = player_yellow.rect.x, player_yellow.rect.y
+                projectile.rect.x, projectile.rect.y = player_2.rect.x, player_2.rect.y
+                projectile.startx, projectile.starty = player_2.rect.x, player_2.rect.y
                 projectile.moving = True
                 done = False
 
