@@ -10,25 +10,10 @@ import player
 import pygame
 import random
 from pygame.locals import *
+from Functions import displayTopRight_two
 
 import os  # Import needed to center PyGame's window
 os.environ['SDL_VIDEO_CENTERED'] = '1'  # Code to center PyGame window on the screen
-
-
-def displayTopRight_two(text, variable1, variable2):
-    font = pygame.font.SysFont("None", 36)  # Declares the font to be used by the text
-    text = font.render(text.format(variable1, variable2), True, (255, 255, 255))  # Renders the text by the font chosen before
-    text_posX, text_posY, text_lenght, text_height = text.get_rect()  # Gets dimensions of the text
-    screen.blit(text, (0, 0))  # Sticks the text to the middle of the screen
-
-
-def checkPressedKeys(event):
-    if event.key == pygame.K_UP:
-        if projectile.moving == False:  # Checks is the ball is moving, if not:
-            projectile.angle += 1  # Adds to the ball angle
-            if projectile.angle >= 360:  # Limits the angle to a maximum of 180
-                projectile.angle = 360
-
 
 # ============= Initializing =============
 # PyGame initialization:
@@ -134,7 +119,7 @@ while running:
     # Drawing stuff on the screen:
     screen.blit(background, (0, 0))
     player_group.draw(screen)
-    displayTopRight_two("Speed: {0}, Angle: {1}", projectile.speed, projectile.angle)
+    displayTopRight_two("Speed: {0}, Angle: {1}", projectile.speed, projectile.angle, screen)
 
     # Will only draw the projectile on the screen if it is moving:
     if projectile.moving == True:
