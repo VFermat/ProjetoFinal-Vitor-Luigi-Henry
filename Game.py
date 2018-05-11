@@ -63,7 +63,17 @@ while running:
         if event.type == QUIT:  # If event is QUIT (Window close)
             running = False  # Sets playing state to false, thus quitting the main loop
         if event.type == pygame.KEYDOWN:
-            projectile.checkPressedKeys(event)
+            if event.key == pygame.K_UP:
+                projectile.change_angle("angle up")
+
+            if event.key == pygame.K_DOWN:
+                projectile.change_angle("angle down")
+
+            if event.key == pygame.K_RIGHT:
+                projectile.change_speed("speed up")
+
+            if event.key == pygame.K_LEFT:
+                projectile.change_speed("speed down")
 
             if event.key == pygame.K_1:
                 projectile = projectile_pokeball
