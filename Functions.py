@@ -1,5 +1,6 @@
 import pygame
 import math
+import random
 from pygame.locals import *
 
 def displayWinnerText(text, winner, screen):
@@ -93,6 +94,14 @@ def get_distance(origin, destination):
         y_dist = origin[1] - destination[1]
         distance = ((x_dist)**2 + (y_dist)**2)**(1/2)
         return distance
+    
+def reset_player(player_1, player_2):
+    # Resseting Player 1
+    player_1.health = 100
+    player_1.rect.x = 10
+    # Resseting Player 2
+    player_2.rect.x = 1180
+    player_2.health = 100
 
 
 def reset_projectile(group, default_projectile):
