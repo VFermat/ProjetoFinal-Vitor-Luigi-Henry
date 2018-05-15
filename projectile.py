@@ -5,20 +5,17 @@ from pygame.locals import *
 
 class Projectile(pygame.sprite.Sprite):
 
-    def __init__(self, screen_size, imageFile, posx, posy, damage):
+    def __init__(self, screen_size, imageFile, name, posx, posy, damage):
         # Sets sprite stuff:
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(imageFile)
         self.rect = self.image.get_rect()
 
+        # Projectile name:
+        self.name = name
+
         # Screen size:
         self.screen_w, self.screen_h = screen_size
-
-        # Sprite size:
-        self.width, self.height = self.image.get_size()
-
-        # Sprite center:
-        self.center = (self.rect.x + self.width / 2, self.rect.y + self.height / 2)
 
         # Sets initial position:
         self.rect.x = posx
@@ -30,7 +27,7 @@ class Projectile(pygame.sprite.Sprite):
         self.startx = 0
         self.starty = 0
 
-        # Sets movement:s
+        # Sets movement:
         self.moving = False
 
         # Sets time:
@@ -40,29 +37,50 @@ class Projectile(pygame.sprite.Sprite):
         self.damage = damage
 
     def move(self):
-        velocity_x = math.cos(math.radians(self.angle)) * self.speed  # Calculates Vx
-        velocity_y = math.sin(math.radians(self.angle)) * self.speed  # Calculates Vy
+        # Calculates Vx:
+        velocity_x = math.cos(math.radians(self.angle)) * self.speed
+        # Calculates Vy
+        velocity_y = math.sin(math.radians(self.angle)) * self.speed
 
-        distance_x = velocity_x * self.time  # Calculates total distance traveled on X axis
-        distance_y = (velocity_y * self.time) + ((-9.81 * (self.time ** 2)) / 2)  # Calculates total distance traveled on Y axis
+        # Calculates total distance traveled on X axis:
+        distance_x = velocity_x * self.time
+        # Calculates total distance traveled on Y axis:
+        distance_y = (velocity_y * self.time) + ((-9.81 * (self.time ** 2)) / 2)
 
-        new_x = round(self.startx + distance_x)  # Calculates new coord on X axis
-        new_y = round(self.starty - distance_y)  # Calculates new coord on Y axis
+        # Calculates new coord on X axis:
+        new_x = round(self.startx + distance_x)
+        # Calculates new coord on Y axis:
+        new_y = round(self.starty - distance_y)
 
-        self.time += 0.1  # Adds to the object time
+        # Adds to the object time:
+        self.time += 0.1
 
-        if new_y <= self.screen_h - self.height:  # Checks if the sprite is above the window's bottom, if so:
+        # Checks if the sprite is above the window's bottom, if so:
+        if new_y <= self.screen_h - self.rect.height\
+                and new_x >= 0\
+                and new_x <= self.screen_w - self.rect.width:
             self.rect.x = new_x
             self.rect.y = new_y
         else:
             self.moving = False
             self.time = 0
             self.rotate_angle = 0
-            self.rect.y = self.screen_h - self.height
+            self.rect.y = self.screen_h - self.rect.height
 
-    def calculateCenter(self):
-        # Calculates sprite center:
-        self.center = (self.rect.x + self.width / 2, self.rect.y + self.height / 2)
+    def stop_movement(self):
+        # Stops the sprite movement and resets it's attributes:
+        self.moving = False
+        self.time = 0
+        self.rotate_angle = 0
+        self.rect.y = self.screen_h - self.rect.height
+
+    def reset_stats(self):
+        # Stops the sprite movement and resets it's attributes:
+        self.moving = False
+        self.time = 0
+        self.rotate_angle = 0
+        self.rect.x = 0
+        self.rect.y = 0
 
     def change_speed(self, speed_change):
         if speed_change == "speed up":

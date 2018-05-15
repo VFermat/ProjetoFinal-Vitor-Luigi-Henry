@@ -3,7 +3,7 @@ from pygame.locals import *
 
 
 class Player(pygame.sprite.Sprite):
-
+    # Player's health:
     health = 100
 
     def __init__(self, sprite, x_initial, y_initial):
@@ -16,13 +16,10 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = x_initial
         self.rect.y = y_initial
 
-        # Gets sprite size:
-        self.width, self.height = self.image.get_size()
-
     def move(self, direction):
         if direction == "right":
             self.rect.x += 1
-        else:
+        elif direction == "left":
             self.rect.x -= 1
 
     def getDamage(self, weapon_damage):
