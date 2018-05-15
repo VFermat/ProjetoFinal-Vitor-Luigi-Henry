@@ -18,9 +18,9 @@ class Player(pygame.sprite.Sprite):
 
     def move(self, direction):
         if direction == "right":
-            self.rect.x += 1
+            self.rect.x += 5
         elif direction == "left":
-            self.rect.x -= 1
+            self.rect.x -= 5
 
     def getDamage(self, weapon_damage):
         self.health -= weapon_damage

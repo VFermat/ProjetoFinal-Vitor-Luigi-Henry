@@ -2,6 +2,15 @@ import pygame
 import math
 from pygame.locals import *
 
+def displayWinnerText(text, winner, screen):
+    # Declares the font to be used by the text
+    font = pygame.font.SysFont("None", 55)
+    # Renders the text by the font chosen before
+    text = font.render(text.format(winner), True, (182, 38, 37))
+    # Gets dimensions of the text
+    text_posX, text_posY, text_lenght, text_height = text.get_rect()
+    # Sticks the text to the middle of the screen
+    screen.blit(text, (640, 320))
 
 def displayTopLeft_two(text, variable1, variable2, screen):
     # Declares the font to be used by the text

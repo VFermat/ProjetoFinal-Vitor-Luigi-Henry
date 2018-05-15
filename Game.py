@@ -73,11 +73,20 @@ projectilesDisplay = projectiles_display.Projectiles_Display(screen_size,
 projectilesDisplay_group = pygame.sprite.Group()
 projectilesDisplay_group.add(projectilesDisplay)
 
+winner = None
+
 # Variables:
 done = None
 playerHit = None
 playerTurn = "1"
 projectile = projectile_pokeball
+
+#Winner Text
+black = (0, 0, 0)
+
+text = """The Winner Is: {0}!! 
+        Congrats on Winning the Game!
+        Please Exit the Screen and Restart the Game"""
 
 # ===============   LOOPING PRINCIPAL   ===============
 running = True
@@ -150,6 +159,11 @@ while running:
         if pygame.sprite.collide_rect(projectile, player_2):
             projectile.stop_movement()
             player_2.health -= projectile.damage
+            # Checks if there is a winner
+            if player_2.health <= 0:
+                player_2.health = 0
+                winner = "Player 1"
+                
 
         if done == False:
             if projectile.moving == False:
@@ -157,6 +171,7 @@ while running:
                 projectile_group, projectile = reset_projectile(projectile_group, projectile_pokeball)
                 playerTurn = "2"
                 done = True
+                
 
     if playerTurn == "2":
         pressed_keys = pygame.key.get_pressed()
@@ -170,7 +185,11 @@ while running:
         if pygame.sprite.collide_rect(projectile, player_1):
             projectile.stop_movement()
             player_1.health -= projectile.damage
-
+            # Checks if there is a winner
+            if player_1.health <= 0:
+                player_1.health = 0
+                winner = "Player 2"
+                
         if done == False:
             if projectile.moving == False:
                 projectile.reset_stats()
@@ -204,8 +223,22 @@ while running:
         projectile_group.draw(screen)
         projectile.update()
 
+    if winner is not None:
+        screen.fill(black)
+        displayWinnerText(text, winner, screen)
+
     # Updates display:
     pygame.display.update()
+    """
+# ===============   WINNER'S SCREEN   ===============
 
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == QUIT:           
+            pygame.display.update() 
+    
+    screen.blit(text, (screen_width/2, screen_height/2))
+    """
 # Quits the game:
 pygame.display.quit()
