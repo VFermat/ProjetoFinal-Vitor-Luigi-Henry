@@ -122,8 +122,8 @@ def get_projectileStats(screen, player_1, player_2, playerTurn, projectile):
             projectile.speed = distancePlayerMouse
             projectile.angle = mouse_angle
 
-            if projectile.speed > 150:
-                projectile.speed = 150
+            if projectile.speed > projectile.max_speed:
+                projectile.speed = projectile.max_speed
 
     # Checks if it is player's 1 turn:
     if playerTurn == "2":
@@ -149,5 +149,5 @@ def get_projectileStats(screen, player_1, player_2, playerTurn, projectile):
             projectile.speed = distancePlayerMouse
             projectile.angle = mouse_angle
 
-            if projectile.speed > 150:
-                projectile.speed = 150
+            if projectile.speed > projectile.max_speed:
+                projectile.speed = projectile.max_speed

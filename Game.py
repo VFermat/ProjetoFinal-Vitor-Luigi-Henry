@@ -11,7 +11,7 @@ import player
 import pygame
 import random
 import math
-from functions import *
+from Functions import *
 from pygame.locals import *
 
 # Import needed to center PyGame's window
@@ -54,12 +54,14 @@ projectile_pokeball = projectile.Projectile(screen_size,
                                             "Sprites/pokeball.png",
                                             "pokeball",
                                             0, 0,
-                                            10)
+                                            10,
+                                            150)
 projectile_purpleball = projectile.Projectile(screen_size,
                                               "Sprites/purple_ball_50x50.png",
                                               "purpleball",
                                               0, 0,
-                                              15)
+                                              15,
+                                              120)
 projectile_group = pygame.sprite.Group()
 projectile_group.add(projectile_pokeball)
 

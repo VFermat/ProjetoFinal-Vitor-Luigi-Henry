@@ -5,7 +5,7 @@ from pygame.locals import *
 
 class Projectile(pygame.sprite.Sprite):
 
-    def __init__(self, screen_size, imageFile, name, posx, posy, damage):
+    def __init__(self, screen_size, imageFile, name, posx, posy, damage, max_speed):
         # Sets sprite stuff:
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(imageFile)
@@ -35,6 +35,9 @@ class Projectile(pygame.sprite.Sprite):
 
         # Sets projectile damage:
         self.damage = damage
+        
+        # Sets the Max Speed for the projectile
+        self.max_speed = max_speed
 
     def move(self):
         # Calculates Vx:
@@ -82,29 +85,6 @@ class Projectile(pygame.sprite.Sprite):
         self.rect.x = 0
         self.rect.y = 0
 
-    def change_speed(self, speed_change):
-        if speed_change == "speed up":
-            if self.moving == False:  # Checks is the ball is moving, if not:
-                self.speed += 5  # Adds to the ball speed
-                if self.speed >= 150:  # Limits the speed to a maximum of 150
-                    self.speed = 150
-        if speed_change == "speed down":
-            if self.moving == False:  # Checks is the ball is moving, if not:
-                self.speed -= 5  # Subtracts to the ball speed
-                if self.speed <= 0:  # Limits the speed to a minimum of 0
-                    self.speed = 0
-
-    def change_angle(self, angle_change):
-        if angle_change == "angle up":
-            if self.moving == False:  # Checks is the ball is moving, if not:
-                self.angle += 5  # Adds to the ball angle
-                if self.angle >= 360:  # Limits the angle to a maximum of 360
-                    self.angle = 360
-        if angle_change == "angle down":
-            if self.moving == False:  # Checks is the ball is moving, if not:
-                self.angle -= 5  # Subtracts to the ball angle
-                if self.angle <= 0:  # Limits the angle to a minimum of 0
-                    self.angle = 0
 
     def update(self):
         if self.moving == True:  # Checks if the ball is moving, if so:
