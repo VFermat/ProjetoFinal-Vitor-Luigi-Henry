@@ -126,17 +126,6 @@ while running:
                         done = False
     
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    projectile.change_angle("angle up")
-    
-                if event.key == pygame.K_DOWN:
-                    projectile.change_angle("angle down")
-    
-                if event.key == pygame.K_RIGHT:
-                    projectile.change_speed("speed up")
-    
-                if event.key == pygame.K_LEFT:
-                    projectile.change_speed("speed down")
     
                 if event.key == pygame.K_1:
                     if projectile.moving == False:
