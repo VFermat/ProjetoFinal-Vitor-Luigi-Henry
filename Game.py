@@ -97,8 +97,24 @@ while running:
     # Sets game FPS:
     time = clock.tick(framesPerSecond)
 
-    # Checking for events:
-    if screen_type == 1:
+    # Main Menu
+    if screen_type == 1: 
+        # Checking for events:
+        for event in pygame.event.get():  # Loops through game events
+            if event.type == QUIT:  # If event is QUIT (Window close)
+                running = False  # Sets playing state to false, thus quitting the main loop
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    reset_player(player_1, player_2)
+                    screen_type = 2
+                    
+        screen.fill(black)
+        
+        
+    
+    # Game Loop
+    elif screen_type == 2:
+        # Checking for events:
         for event in pygame.event.get():  # Loops through game events
             if event.type == QUIT:  # If event is QUIT (Window close)
                 running = False  # Sets playing state to false, thus quitting the main loop
@@ -156,7 +172,7 @@ while running:
                 if player_2.health <= 0:
                     player_2.health = 0
                     winner = "Player 1"
-                    screen_type = 2
+                    screen_type = 3
                     
     
             if done == False:
@@ -183,7 +199,7 @@ while running:
                 if player_1.health <= 0:
                     player_1.health = 0
                     winner = "Player 2"
-                    screen_type = 2
+                    screen_type = 3
                     
             if done == False:
                 if projectile.moving == False:
@@ -218,14 +234,14 @@ while running:
             projectile_group.draw(screen)
             projectile.update()
         
-    elif screen_type == 2:
+    elif screen_type == 3:
         
         for event in pygame.event.get():  # Loops through game events
             if event.type == QUIT:  # If event is QUIT (Window close)
                 running = False  # Sets playing state to false, thus quitting the main loop
             
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_h:
+                if event.key == pygame.K_RETURN:
                     reset_player(player_1, player_2)
                     screen_type = 1
                                     
