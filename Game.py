@@ -84,9 +84,9 @@ projectile = projectile_pokeball
 #Winner Text
 black = (0, 0, 0)
 
-text = """The Winner Is: {0}!! 
-        Congrats on Winning the Game!
-        Please Exit the Screen and Restart the Game"""
+text = ("The Winner Is: {0}!!",
+        "Congrats on Winning the Game!",
+        "Please Press h and Restart the Game")
         
 # screen_type sets which screen we are using
 screen_type = 1
@@ -230,7 +230,7 @@ while running:
                     screen_type = 1
                                     
         screen.fill(black)
-        displayWinnerText(text, winner, screen)
+        displayWinnerText(text, winner, screen, screen_size)
         
 
     # Updates display:

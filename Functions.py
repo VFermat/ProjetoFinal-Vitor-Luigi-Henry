@@ -1,17 +1,28 @@
 import pygame
 import math
-import random
 from pygame.locals import *
 
-def displayWinnerText(text, winner, screen):
+def displayWinnerText(text, winner, screen, screen_size):
     # Declares the font to be used by the text
     font = pygame.font.SysFont("None", 55)
     # Renders the text by the font chosen before
-    text = font.render(text.format(winner), True, (182, 38, 37))
+    text1 = font.render(text[0].format(winner), True, (182, 38, 37))
+    text2 = font.render(text[1], True, (182, 38, 37))
+    text3 = font.render(text[2], True, (182, 38, 37))
+    # Gets the size of the screen
+    screen_length = screen_size[0]
+    screen_height = screen_size[1]
     # Gets dimensions of the text
-    text_posX, text_posY, text_lenght, text_height = text.get_rect()
+    text_posX1, text_posY1, text_lenght1, text_height1 = text1.get_rect()
+    text_posX2, text_posY2, text_lenght2, text_height2 = text2.get_rect()
+    text_posX3, text_posY3, text_lenght3, text_height3 = text3.get_rect()
     # Sticks the text to the middle of the screen
-    screen.blit(text, (640, 320))
+    screen.blit(text2, 
+                (screen_length/2 - text_lenght2/2, screen_height/2 - text_height2/2))
+    screen.blit(text1, 
+                (screen_length/2 - text_lenght1/2, screen_height/2 - text_height2/2 - text_height1))
+    screen.blit(text3,
+                (screen_length/2 - text_lenght3/2, screen_height/2 + text_height2/2))
 
 def displayTopLeft_two(text, variable1, variable2, screen):
     # Declares the font to be used by the text
