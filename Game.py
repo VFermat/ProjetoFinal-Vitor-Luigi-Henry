@@ -73,11 +73,12 @@ projectilesDisplay = projectiles_display.Projectiles_Display(screen_size,
 projectilesDisplay_group = pygame.sprite.Group()
 projectilesDisplay_group.add(projectilesDisplay)
 
-winner = None
+
 
 # Variables:
 done = None
 playerHit = None
+winner = None
 playerTurn = "1"
 projectile = projectile_pokeball
 
@@ -235,16 +236,7 @@ while running:
 
     # Updates display:
     pygame.display.update()
-    """
-# ===============   WINNER'S SCREEN   ===============
+ 
 
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == QUIT:           
-            pygame.display.update() 
-    
-    screen.blit(text, (screen_width/2, screen_height/2))
-    """
 # Quits the game:
 pygame.display.quit()
