@@ -11,7 +11,9 @@ import player
 import pygame
 import random
 import math
-from Functions import *
+import text_input as ti
+from TextDisplay import *
+from GameMechanics import *
 from pygame.locals import *
 
 # Import needed to center PyGame's window
@@ -82,15 +84,27 @@ winner = None
 playerTurn = "1"
 projectile = projectile_pokeball
 
-#Winner Text
+# Winner Text
 black = (0, 0, 0)
 
 text = ("The Winner Is: {0}!!",
         "Congrats on Winning the Game!",
         "Please Press h and Restart the Game")
         
-# screen_type sets which screen we are using
+# Screen_type sets which screen we are using
 screen_type = 1
+
+"""
+screen_type = 1 -> Initial Screen
+screen_type = 2 -> Game Loop
+screen_type = 3 -> End of Game Screen
+screen_type = 4 -> Get Player 1 Name
+screen_type = 5 -> Get Player 2 Name
+"""
+
+# Initializes the text_input used to get users name
+player1_input = ti.TextInput()
+player2_input = ti.TextInput()
 
 # ===============   LOOPING PRINCIPAL   ===============
 running = True
@@ -110,7 +124,6 @@ while running:
                     screen_type = 2
                     
         screen.fill(black)
-        
         
     
     # Game Loop
