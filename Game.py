@@ -82,11 +82,14 @@ playerHit = None
 winner = None
 playerTurn = "1"
 projectile = projectile_pokeball
-
-# Winner Text
 black = (0, 0, 0)
 
-text = ("The Winner Is: {0}!!",
+# Main Screen
+main_text = ("Welcome to Foxy!",
+             "Press Enter to Play.")
+
+# Winner Text
+winner_text = ("The Winner Is: {0}!!",
         "Congrats on Winning the Game!",
         "Please Press h and Restart the Game")
 
@@ -100,10 +103,6 @@ screen_type = 3 -> End of Game Screen
 screen_type = 4 -> Get Player 1 Name
 screen_type = 5 -> Get Player 2 Name
 """
-
-# Initializes the text_input used to get users name
-player1_input = ti.TextInput()
-player2_input = ti.TextInput()
 
 # ===============   LOOPING PRINCIPAL   ===============
 running = True
@@ -121,8 +120,9 @@ while running:
                 if event.key == pygame.K_RETURN:
                     reset_player(player_1, player_2)
                     screen_type = 2
-
+        
         screen.fill(black)
+        welcomeScreen(main_text, screen, screen_size)
 
     # Game Loop
     elif screen_type == 2:
@@ -256,7 +256,7 @@ while running:
                     screen_type = 1
 
         screen.fill(black)
-        displayWinnerText(text, winner, screen, screen_size)
+        displayWinnerText(winner_text, winner, screen, screen_size)
 
     # Updates display:
     pygame.display.update()
