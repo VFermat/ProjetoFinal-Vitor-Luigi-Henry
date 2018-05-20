@@ -76,7 +76,6 @@ projectilesDisplay_group = pygame.sprite.Group()
 projectilesDisplay_group.add(projectilesDisplay)
 
 
-
 # Variables:
 done = None
 playerHit = None
@@ -90,7 +89,7 @@ black = (0, 0, 0)
 text = ("The Winner Is: {0}!!",
         "Congrats on Winning the Game!",
         "Please Press h and Restart the Game")
-        
+
 # Screen_type sets which screen we are using
 screen_type = 1
 
@@ -113,7 +112,7 @@ while running:
     time = clock.tick(framesPerSecond)
 
     # Main Menu
-    if screen_type == 1: 
+    if screen_type == 1:
         # Checking for events:
         for event in pygame.event.get():  # Loops through game events
             if event.type == QUIT:  # If event is QUIT (Window close)
@@ -122,53 +121,52 @@ while running:
                 if event.key == pygame.K_RETURN:
                     reset_player(player_1, player_2)
                     screen_type = 2
-                    
+
         screen.fill(black)
-        
-    
+
     # Game Loop
     elif screen_type == 2:
         # Checking for events:
         for event in pygame.event.get():  # Loops through game events
             if event.type == QUIT:  # If event is QUIT (Window close)
                 running = False  # Sets playing state to false, thus quitting the main loop
-    
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if projectile.moving == False:
                     if playerTurn == "1":
                         projectile.rect.x, projectile.rect.y = player_1.rect.center
                         projectile.startx, projectile.starty = player_1.rect.center
-    
+
                         if projectile.speed > 150:
                             projectile.speed = 150
-    
+
                         projectile.moving = True
                         done = False
-    
+
                     if playerTurn == "2":
                         projectile.rect.x, projectile.rect.y = player_2.rect.center
                         projectile.startx, projectile.starty = player_2.rect.center
-    
+
                         if projectile.speed > 150:
                             projectile.speed = 150
-    
+
                         projectile.moving = True
                         done = False
-    
+
             if event.type == pygame.KEYDOWN:
-    
+
                 if event.key == pygame.K_1:
                     if projectile.moving == False:
                         projectile = projectile_pokeball
                         projectile_group.empty()
                         projectile_group.add(projectile_pokeball)
-    
+
                 if event.key == pygame.K_2:
                     if projectile.moving == False:
                         projectile = projectile_purpleball
                         projectile_group.empty()
                         projectile_group.add(projectile_purpleball)
-    
+
         # Players turn:
         if playerTurn == "1":
             pressed_keys = pygame.key.get_pressed()
@@ -176,7 +174,7 @@ while running:
                 player_1.move("left")
             if pressed_keys[K_d]:
                 player_1.move("right")
-    
+
             # Checks for collision, if theres is any, stops projectile movement and
             # does damage to the enemy:
             if pygame.sprite.collide_rect(projectile, player_2):
@@ -187,23 +185,21 @@ while running:
                     player_2.health = 0
                     winner = "Player 1"
                     screen_type = 3
-                    
-    
+
             if done == False:
                 if projectile.moving == False:
                     projectile.reset_stats()
                     projectile_group, projectile = reset_projectile(projectile_group, projectile_pokeball)
                     playerTurn = "2"
                     done = True
-                    
-    
+
         if playerTurn == "2":
             pressed_keys = pygame.key.get_pressed()
             if pressed_keys[K_a]:
                 player_2.move("left")
             if pressed_keys[K_d]:
                 player_2.move("right")
-    
+
             # Checks for collision, if theres is any, stops projectile movement and
             # does damage to the enemy:
             if pygame.sprite.collide_rect(projectile, player_1):
@@ -214,23 +210,23 @@ while running:
                     player_1.health = 0
                     winner = "Player 2"
                     screen_type = 3
-                    
+
             if done == False:
                 if projectile.moving == False:
                     projectile.reset_stats()
                     projectile_group, projectile = reset_projectile(projectile_group, projectile_pokeball)
                     playerTurn = "1"
                     done = True
-    
+
         # Drawing stuff on the screen:
         screen.blit(background, (0, 0))
         projectilesDisplay_group.draw(screen)
         player_group.draw(screen)
-    
+
         get_projectileStats(screen, player_1, player_2, playerTurn, projectile)
-    
+
         displayChosenBomb(projectilesDisplay, projectile, screen, screen_size)
-    
+
         displayTopLeft_two("Speed: {0}, Angle: {1}",
                            projectile.speed,
                            projectile.angle,
@@ -247,25 +243,24 @@ while running:
         if projectile.moving == True:
             projectile_group.draw(screen)
             projectile.update()
-        
+
     elif screen_type == 3:
-        
+
         for event in pygame.event.get():  # Loops through game events
             if event.type == QUIT:  # If event is QUIT (Window close)
                 running = False  # Sets playing state to false, thus quitting the main loop
-            
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     reset_player(player_1, player_2)
                     screen_type = 1
-                                    
+
         screen.fill(black)
         displayWinnerText(text, winner, screen, screen_size)
-        
 
     # Updates display:
     pygame.display.update()
- 
+
 
 # Quits the game:
 pygame.display.quit()

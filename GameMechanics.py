@@ -1,3 +1,7 @@
+import pygame
+import math
+
+
 def get_angle(origin, destination):
     # Finds the angle between two points:
     x_dist = destination[0] - origin[0]
@@ -20,7 +24,8 @@ def get_distance(origin, destination):
         y_dist = origin[1] - destination[1]
         distance = ((x_dist)**2 + (y_dist)**2)**(1/2)
         return distance
-    
+
+
 def reset_player(player_1, player_2):
     # Resseting Player 1
     player_1.health = 100
