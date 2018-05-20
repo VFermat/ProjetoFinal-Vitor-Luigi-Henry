@@ -5,6 +5,7 @@ from pygame.locals import *
 class Player(pygame.sprite.Sprite):
     # Player's health:
     health = 100
+    name = ""
 
     def __init__(self, sprite, x_initial, y_initial):
         # Sets sprite stuff:

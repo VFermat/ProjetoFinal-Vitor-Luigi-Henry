@@ -30,9 +30,11 @@ def reset_player(player_1, player_2):
     # Resseting Player 1
     player_1.health = 100
     player_1.rect.x = 10
+    player_1.name = ""
     # Resseting Player 2
     player_2.rect.x = 1180
     player_2.health = 100
+    player_2.name = ""
 
 
 def reset_projectile(group, default_projectile):

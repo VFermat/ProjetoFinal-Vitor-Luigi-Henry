@@ -48,7 +48,8 @@ def displayTopRight_two(text, variable1, variable2, screen, screen_size):
     screen.blit(text, (screen_size[0] - text_lenght, 0))
 
 
-def displayHeath(player, screen_size, screen):
+def displayHeathAndName(player, screen_size, screen):
+# ===============   DISPLAY HEALTH   ===============
     # Declares the font to be used by the text
     font = pygame.font.SysFont("None", 20)
     # Renders the text by the font chosen before
@@ -60,7 +61,15 @@ def displayHeath(player, screen_size, screen):
                      player.rect.y - text_height)
     # Sticks the text to the middle of the screen
     screen.blit(text, text_position)
-
+# ===============   DISPLAY NAME   ===============
+    name = font.render("{0}".format(player.name), True, BLACK)
+    # Gets dimensions of the text
+    name_posX, name_posY, name_lenght, name_height = name.get_rect()
+    # Centers the text on top of the sprite:
+    name_position = (player.rect.x + player.rect.width/2 - name_lenght/2,
+                     player.rect.y - text_height - name_height)
+    # Blits the name
+    screen.blit(name, name_position)
 
 def displayChosenBomb(projectilesDisplay, projectile, screen, screen_size):
     # Declares the font to be used by the text

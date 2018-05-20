@@ -83,6 +83,7 @@ winner = None
 playerTurn = "1"
 projectile = projectile_pokeball
 black = (0, 0, 0)
+red = (182, 38, 37)
 
 # Main Screen
 main_text = ("Welcome to Foxy!",
@@ -91,7 +92,7 @@ main_text = ("Welcome to Foxy!",
 # Winner Text
 winner_text = ("The Winner Is: {0}!!",
         "Congrats on Winning the Game!",
-        "Please Press h and Restart the Game")
+        "Please Press Enter and Restart the Game")
 
 # Screen_type sets which screen we are using
 screen_type = 1
@@ -119,7 +120,7 @@ while running:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     reset_player(player_1, player_2)
-                    screen_type = 2
+                    screen_type = 4
         
         screen.fill(black)
         welcomeScreen(main_text, screen, screen_size)
@@ -183,7 +184,7 @@ while running:
                 # Checks if there is a winner
                 if player_2.health <= 0:
                     player_2.health = 0
-                    winner = "Player 1"
+                    winner = player_1.name
                     screen_type = 3
 
             if done == False:
@@ -208,7 +209,7 @@ while running:
                 # Checks if there is a winner
                 if player_1.health <= 0:
                     player_1.health = 0
-                    winner = "Player 2"
+                    winner = player_2.name
                     screen_type = 3
 
             if done == False:
@@ -236,8 +237,8 @@ while running:
                             "",
                             screen,
                             screen_size)
-        displayHeath(player_1, screen_size, screen)
-        displayHeath(player_2, screen_size, screen)
+        displayHeathAndName(player_1, screen_size, screen)
+        displayHeathAndName(player_2, screen_size, screen)
 
         # Will only draw the projectile on the screen if it is moving:
         if projectile.moving == True:
@@ -257,6 +258,32 @@ while running:
 
         screen.fill(black)
         displayWinnerText(winner_text, winner, screen, screen_size)
+    
+    elif screen_type == 4:
+        
+        events = pygame.event.get()
+        for event in events:  # Loops through game events
+            if event.type == QUIT:  # If event is QUIT (Window close)
+                running = False  # Sets playing state to false, thus quitting the main loop
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    screen_type = 5
+        
+        player_1.name = ti.textInputBox(player_1.name, screen, screen_size, events)        
+
+    elif screen_type == 5:
+        
+        events = pygame.event.get()
+        for event in events:  # Loops through game events
+            if event.type == QUIT:  # If event is QUIT (Window close)
+                running = False  # Sets playing state to false, thus quitting the main loop
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    screen_type = 2
+        
+        player_2.name = ti.textInputBox(player_2.name, screen, screen_size, events)        
 
     # Updates display:
     pygame.display.update()
