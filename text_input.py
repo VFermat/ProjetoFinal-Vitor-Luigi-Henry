@@ -16,8 +16,8 @@ WHITE = (252, 252, 252)
 
 ACCEPTED = string.ascii_letters+string.digits+string.punctuation+" "
 
-def textInputBox(name, screen, screen_size, events, max_lenght=10, 
-                 font_style="None", font_size=25, font_color=WHITE):
+def textInputBox(name, screen, screen_size, events, turn, max_lenght=10, 
+                 font_style="None", font_size=35, font_color=WHITE):
     
     # Preparing the Screen
     screen.fill(BLACK)    
@@ -26,7 +26,10 @@ def textInputBox(name, screen, screen_size, events, max_lenght=10,
     font = pygame.font.SysFont(font_style, font_size)
     
     # Rendering the basic texts
-    text1 = "Please Type Player 1's Name."
+    if turn == 1:
+        text1 = "Please Type Player 1's Name."
+    else:
+        text1 = "Please Type Player 2's Name."
     rendered_text1 = font.render(text1, True, RED)
     text2 = "Press Enter When You're Ready."
     rendered_text2 = font.render(text2, True, RED)

@@ -17,10 +17,10 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = x_initial
         self.rect.y = y_initial
 
-    def move(self, direction):
-        if direction == "right":
+    def move(self, direction, projectile_move):
+        if direction == "right" and not projectile_move:
             self.rect.x += 5
-        elif direction == "left":
+        elif direction == "left" and not projectile_move:
             self.rect.x -= 5
 
     def getDamage(self, weapon_damage):

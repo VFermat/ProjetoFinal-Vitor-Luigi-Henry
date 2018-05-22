@@ -172,9 +172,9 @@ while running:
         if playerTurn == "1":
             pressed_keys = pygame.key.get_pressed()
             if pressed_keys[K_a]:
-                player_1.move("left")
+                player_1.move("left", projectile.moving)
             if pressed_keys[K_d]:
-                player_1.move("right")
+                player_1.move("right", projectile.moving)
 
             # Checks for collision, if theres is any, stops projectile movement and
             # does damage to the enemy:
@@ -197,9 +197,9 @@ while running:
         if playerTurn == "2":
             pressed_keys = pygame.key.get_pressed()
             if pressed_keys[K_a]:
-                player_2.move("left")
+                player_2.move("left", projectile.moving)
             if pressed_keys[K_d]:
-                player_2.move("right")
+                player_2.move("right", projectile.moving)
 
             # Checks for collision, if theres is any, stops projectile movement and
             # does damage to the enemy:
@@ -268,9 +268,10 @@ while running:
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    screen_type = 5
+                    if len(player_1.name) != 0:
+                        screen_type = 5                        
         
-        player_1.name = ti.textInputBox(player_1.name, screen, screen_size, events)        
+        player_1.name = ti.textInputBox(player_1.name, screen, screen_size, events, 1)        
 
     elif screen_type == 5:
         
@@ -281,9 +282,10 @@ while running:
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    screen_type = 2
+                    if len(player_2.name) != 0:
+                        screen_type = 2
         
-        player_2.name = ti.textInputBox(player_2.name, screen, screen_size, events)        
+        player_2.name = ti.textInputBox(player_2.name, screen, screen_size, events, 2)        
 
     # Updates display:
     pygame.display.update()
