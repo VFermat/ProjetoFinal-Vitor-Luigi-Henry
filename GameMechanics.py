@@ -58,18 +58,21 @@ def get_projectileStats(screen, player_1, player_2, playerTurn, projectile):
         # Gets angle between player's sprite center and mouse position, converts
         # it to degrees and rounds it:
         mouse_angle = math.degrees(get_angle(player_1_center, mouse_position))
-        mouse_angle = round(mouse_angle)
+        mouse_angle = round(mouse_angle, 2)
+        # Gets the distance between player's sprite center and mouse
+        # position, and rounds it:
+        distancePlayerMouse = get_distance(player_1_center, mouse_position)
+        distancePlayerMouse = round(distancePlayerMouse)
         # Draws a line between the player's center and the mouse position:
-        pygame.draw.line(screen, (0, 0, 0), player_1_center, mouse_position, 4)
-
+        if distancePlayerMouse <= projectile.max_speed:
+            pygame.draw.line(screen, (0, 0, 0), player_1_center, mouse_position, 4)
+        else:
+            pass
+            
         # Checks if the projectile if moving, if not it then changes it's
         # attributes every function call:
         if projectile.moving == False:
-            # Gets the distance between player's sprite center and mouse
-            # position, and rounds it:
-            distancePlayerMouse = get_distance(player_1_center, mouse_position)/2
-            distancePlayerMouse = round(distancePlayerMouse)
-
+            
             projectile.speed = distancePlayerMouse
             projectile.angle = mouse_angle
 
@@ -85,18 +88,20 @@ def get_projectileStats(screen, player_1, player_2, playerTurn, projectile):
         # Gets angle between player's sprite center and mouse position, converts
         # it to degrees and rounds it:
         mouse_angle = math.degrees(get_angle(player_2_center, mouse_position))
-        mouse_angle = round(mouse_angle)
+        mouse_angle = round(mouse_angle, 2)
+        # Gets the distance between player's sprite center and mouse
+        # position, and rounds it:
+        distancePlayerMouse = get_distance(player_2_center, mouse_position)
+        distancePlayerMouse = round(distancePlayerMouse)
         # Draws a line between the player's center and the mouse position:
-        pygame.draw.line(screen, (0, 0, 0), player_2_center, mouse_position, 4)
-
+        if distancePlayerMouse <= projectile.max_speed:
+            pygame.draw.line(screen, (0, 0, 0), player_2_center, mouse_position, 4)
+        else:
+            pass
         # Checks if the projectile if moving, if not it then changes it's
         # attributes every function call:
         if projectile.moving == False:
-            # Gets the distance between player's sprite center and mouse
-            # position, and rounds it:
-            distancePlayerMouse = get_distance(player_2_center, mouse_position)/2
-            distancePlayerMouse = round(distancePlayerMouse)
-
+        
             projectile.speed = distancePlayerMouse
             projectile.angle = mouse_angle
 
