@@ -11,10 +11,10 @@ import math
 
 class Terrain:
     
-    def __init__(self, background_rect, rect_height, s=25):
+    def __init__(self, background_rect, rect_height, s=35):
         self.rect = background_rect
         # maxHeight sets that the maximum of the terrain column to half of the background height
-        self.maxHeight = rect_height/2
+        self.maxHeight = round(rect_height*random.uniform(1, 2)/2)
         self.smoothFactor = s
         self.ter = self.generateTerrain()
         self.changed = True
@@ -22,7 +22,7 @@ class Terrain:
     def generateTerrain(self):
         
         # Generates a different height for each width in the background rect
-        heights = [random.choice(range(1, self.maxHeight)) for p in range(self.rect.width)]
+        heights = [random.randint(1, self.maxHeight) for p in range(self.rect.width)]
         for i in range(len(heights)):
             # Randomizes the Height a bit more
             heights[i] += round(math.sin(6 * math.pi / len(heights) * i) * 30)
@@ -38,16 +38,24 @@ class Terrain:
         heights[1] = sum(heights[0: 5])/5
         heights[len(heights) - 1] = sum(heights[len(heights) - 5: len(heights)])/5
         
-        # Creates an Array for all the pixels on screen
-        pixel_array = [[0 for e in range(self.rect.width)] for i in range(self.rect.height)]
-        
-        # Checks pixel by pixel, and if it is inside the Terrain, sets it to 1 (True)
-        # Otherwise, sets it to 0 (False)
-        for e in range(self.rect.width):
-            for i in range(self.rect.height):
-                if self.rect.height - e < heights[i]:
-                    pixel_array[e][i] = 1
+        s_height = self.rect.height
+        s_width = self.rect.width
+        pixel_array = [[] for e in range(s_width)]
+        for e in range(s_width):
+            for h in range(s_height):
+                h_difference = s_height - heights[e]
+                if h < h_difference:
+                    pixel_array[e].append(0)
                 else:
-                    pixel_array[e][i] = 0
+                    pixel_array[e].append(1)
                     
         return pixel_array
+    
+    def blitTerrain(self, screen):
+        
+        terrain_group = pygame.sprite.Group()
+        
+        for width in range(len(terrain.ter)):
+            for height in range(len(terrain.ter[width])):
+                if terrain.ter[width][height] == 1:
+                    pygame.draw.rect(screen, black, pygame.Rect(width, height, 1, 1))
