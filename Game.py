@@ -16,6 +16,9 @@ from TextDisplay import *
 from GameMechanics import *
 from pygame.locals import *
 
+from settings import *
+from sprites import *
+
 # Import needed to center PyGame's window
 import os
 # Code to center PyGame window on the screen
@@ -25,113 +28,111 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 # PyGame initialization:
 pygame.init()
 pygame.font.init()
-pygame.display.set_caption("Foxes")
+pygame.display.set_caption(windowTitle)
 
 # Screen settings:
-screen_width, screen_height = 1280, 640
-screen_size = (screen_width, screen_height)
 screen = pygame.display.set_mode(screen_size, 0, 32)
 
 # Setting up FPS:
 clock = pygame.time.Clock()
-framesPerSecond = 60
-
-# Background settings:
-background = pygame.image.load("Sprites/flat_background_1280x640.png").convert()
-
-# Player settings:
-player_1 = player.Player("Sprites/Fiona_Red_Right.png",
-                         10,
-                         490)
-player_2 = player.Player("Sprites/Fiona_Blue_Left.png",
-                         1280 - 100,
-                         490)
-
-player_group = pygame.sprite.Group()
-player_group.add(player_1)
-player_group.add(player_2)
-
-# Projectile settings:
-projectile_pokeball = projectile.Projectile(screen_size,
-                                            "Sprites/pokeball.png",
-                                            "pokeball",
-                                            0, 0,
-                                            10,
-                                            150)
-projectile_purpleball = projectile.Projectile(screen_size,
-                                              "Sprites/purple_ball_50x50.png",
-                                              "purpleball",
-                                              0, 0,
-                                              15,
-                                              120)
-projectile_group = pygame.sprite.Group()
-projectile_group.add(projectile_pokeball)
-
-
-# Projectiles display settings:
-projectilesDisplay = projectiles_display.Projectiles_Display(screen_size,
-                                                             "Sprites/AllBombs_50x50.png",
-                                                             0, 0)
-projectilesDisplay_group = pygame.sprite.Group()
-projectilesDisplay_group.add(projectilesDisplay)
-
 
 # Variables:
-done = None
-playerHit = None
-winner = None
-playerTurn = "1"
 projectile = projectile_pokeball
-black = (0, 0, 0)
-red = (182, 38, 37)
-
-# Main Screen
-main_text = ("Welcome to Foxy!",
-             "Press Enter to Play.")
-
-# Winner Text
-winner_text = ("The Winner Is: {0}!!",
-        "Congrats on Winning the Game!",
-        "Please Press Enter and Restart the Game")
-
-# Screen_type sets which screen we are using
-screen_type = 1
-
-"""
-screen_type = 1 -> Initial Screen
-screen_type = 2 -> Game Loop
-screen_type = 3 -> End of Game Screen
-screen_type = 4 -> Get Player 1 Name
-screen_type = 5 -> Get Player 2 Name
-"""
 
 # ===============   LOOPING PRINCIPAL   ===============
 running = True
 while running:
     # Sets game FPS:
-    time = clock.tick(framesPerSecond)
+    clock.tick(framesPerSecond)
 
-    # Main Menu
-    if screen_type == 1:
-        # Checking for events:
-        for event in pygame.event.get():  # Loops through game events
-            if event.type == QUIT:  # If event is QUIT (Window close)
-                running = False  # Sets playing state to false, thus quitting the main loop
+    # Main Menu:
+    if screen_type == "Main Menu":
+
+        # Getting game's events:
+        events = pygame.event.get()
+        # Loops through game events
+        for event in events:
+            # If event is QUIT (Window close)
+            if event.type == QUIT:
+                # Sets playing state to false, thus quitting the main loop
+                running = False
+
+            # Checks if there was a key press:
             if event.type == pygame.KEYDOWN:
+                # Checks if the key pressed was the ENTER key:
                 if event.key == pygame.K_RETURN:
+                    # Resets the players stuff:
                     reset_player(player_1, player_2)
-                    screen_type = 4
-        
+                    # Changes screen:
+                    screen_type = "Player 1 Name"
+
+        # Drawing stuff:
         screen.fill(black)
+
+        # Writing text:
         welcomeScreen(main_text, screen, screen_size)
 
-    # Game Loop
-    elif screen_type == 2:
-        # Checking for events:
-        for event in pygame.event.get():  # Loops through game events
-            if event.type == QUIT:  # If event is QUIT (Window close)
-                running = False  # Sets playing state to false, thus quitting the main loop
+    # Player 1 name screen:
+    elif screen_type == "Player 1 Name":
 
+        # Getting game's events:
+        events = pygame.event.get()
+        # Loops through game events
+        for event in events:
+            # If event is QUIT (Window close)
+            if event.type == QUIT:
+                # Sets playing state to false, thus quitting the main loop
+                running = False
+
+            # Checks if there was a key press:
+            if event.type == pygame.KEYDOWN:
+                # Checks if the key pressed was the ENTER key:
+                if event.key == pygame.K_RETURN:
+                    # Only proceeds if the player typed something:
+                    if len(player_1.name) != 0:
+                        # Changes screen:
+                        screen_type = "Player 2 Name"
+
+        # Text input box:
+        player_1.name = ti.textInputBox(player_1.name, screen, screen_size, events, 1)
+
+    # Player 2 name screen:
+    elif screen_type == "Player 2 Name":
+
+        # Getting game's events:
+        events = pygame.event.get()
+        # Loops through game events
+        for event in events:
+            # If event is QUIT (Window close)
+            if event.type == QUIT:
+                # Sets playing state to false, thus quitting the main loop
+                running = False
+
+            # Checks if there was a key press:
+            if event.type == pygame.KEYDOWN:
+                # Checks if the key pressed was the ENTER key:
+                if event.key == pygame.K_RETURN:
+                    # Only proceeds if the player typed something:
+                    if len(player_2.name) != 0:
+                        # Changes screen:
+                        screen_type = "Playing"
+
+        # Text input box:
+        player_2.name = ti.textInputBox(player_2.name, screen, screen_size, events, 2)
+
+    # Game Loop:
+    elif screen_type == "Playing":
+
+        # Getting game's events:
+        events = pygame.event.get()
+        # Loops through game events
+        for event in events:
+            # If event is QUIT (Window close)
+            if event.type == QUIT:
+                # Sets playing state to false, thus quitting the main loop
+                running = False
+
+            # Checks if there was a mouse button press:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if projectile.moving == False:
                     if playerTurn == "1":
@@ -154,14 +155,16 @@ while running:
                         projectile.moving = True
                         done = False
 
+            # Checks if there was a key press:
             if event.type == pygame.KEYDOWN:
-
+                # Checks if the key pressed was the number 1:
                 if event.key == pygame.K_1:
                     if projectile.moving == False:
                         projectile = projectile_pokeball
                         projectile_group.empty()
                         projectile_group.add(projectile_pokeball)
 
+                # Checks if the key pressed was the number 2:
                 if event.key == pygame.K_2:
                     if projectile.moving == False:
                         projectile = projectile_purpleball
@@ -176,8 +179,8 @@ while running:
             if pressed_keys[K_d]:
                 player_1.move("right", projectile.moving)
 
-            # Checks for collision, if theres is any, stops projectile movement and
-            # does damage to the enemy:
+            # Checks for collision, if theres is any, stops projectile movement
+            # and does damage to the enemy:
             if pygame.sprite.collide_rect(projectile, player_2):
                 projectile.stop_movement()
                 player_2.health -= projectile.damage
@@ -185,7 +188,7 @@ while running:
                 if player_2.health <= 0:
                     player_2.health = 0
                     winner = player_1.name
-                    screen_type = 3
+                    screen_type = "Game End"
 
             if done == False:
                 if projectile.moving == False:
@@ -201,8 +204,8 @@ while running:
             if pressed_keys[K_d]:
                 player_2.move("right", projectile.moving)
 
-            # Checks for collision, if theres is any, stops projectile movement and
-            # does damage to the enemy:
+            # Checks for collision, if theres is any, stops projectile movement
+            # and does damage to the enemy:
             if pygame.sprite.collide_rect(projectile, player_1):
                 projectile.stop_movement()
                 player_1.health -= projectile.damage
@@ -210,7 +213,7 @@ while running:
                 if player_1.health <= 0:
                     player_1.health = 0
                     winner = player_2.name
-                    screen_type = 3
+                    screen_type = "Game End"
 
             if done == False:
                 if projectile.moving == False:
@@ -245,51 +248,32 @@ while running:
             projectile_group.draw(screen)
             projectile.update()
 
-    elif screen_type == 3:
+    # Game end screen (Winner):
+    elif screen_type == "Game End":
 
-        for event in pygame.event.get():  # Loops through game events
-            if event.type == QUIT:  # If event is QUIT (Window close)
-                running = False  # Sets playing state to false, thus quitting the main loop
+        # Getting game's events:
+        events = pygame.event.get()
+        # Loops through game events
+        for event in events:
+            # If event is QUIT (Window close)
+            if event.type == QUIT:
+                # Sets playing state to false, thus quitting the main loop
+                running = False
 
+            # Checks if there was a key press:
             if event.type == pygame.KEYDOWN:
+                # Checks if the key pressed was the ENTER key:
                 if event.key == pygame.K_RETURN:
+                    # Resets the players stuff:
                     reset_player(player_1, player_2)
-                    screen_type = 1
+                    # Changes screen:
+                    screen_type = "Main Menu"
 
         screen.fill(black)
         displayWinnerText(winner_text, winner, screen, screen_size)
-    
-    elif screen_type == 4:
-        
-        events = pygame.event.get()
-        for event in events:  # Loops through game events
-            if event.type == QUIT:  # If event is QUIT (Window close)
-                running = False  # Sets playing state to false, thus quitting the main loop
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    if len(player_1.name) != 0:
-                        screen_type = 5                        
-        
-        player_1.name = ti.textInputBox(player_1.name, screen, screen_size, events, 1)        
-
-    elif screen_type == 5:
-        
-        events = pygame.event.get()
-        for event in events:  # Loops through game events
-            if event.type == QUIT:  # If event is QUIT (Window close)
-                running = False  # Sets playing state to false, thus quitting the main loop
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    if len(player_2.name) != 0:
-                        screen_type = 2
-        
-        player_2.name = ti.textInputBox(player_2.name, screen, screen_size, events, 2)        
 
     # Updates display:
     pygame.display.update()
-
 
 # Quits the game:
 pygame.display.quit()

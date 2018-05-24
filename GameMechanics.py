@@ -17,6 +17,7 @@ def get_distance(origin, destination):
         y_dist = destination[1] - origin[1]
         distance = ((x_dist)**2 + (y_dist)**2)**(1/2)
         return distance
+
     # Checks if x2 < x1:
     elif destination[0] <= origin[0]:
         # Pythagoras Theorem to find distance between two points:
@@ -31,6 +32,7 @@ def reset_player(player_1, player_2):
     player_1.health = 100
     player_1.rect.x = 10
     player_1.name = ""
+
     # Resseting Player 2
     player_2.rect.x = 1180
     player_2.health = 100
@@ -68,11 +70,11 @@ def get_projectileStats(screen, player_1, player_2, playerTurn, projectile):
             pygame.draw.line(screen, (0, 0, 0), player_1_center, mouse_position, 4)
         else:
             pass
-            
+
         # Checks if the projectile if moving, if not it then changes it's
         # attributes every function call:
         if projectile.moving == False:
-            
+
             projectile.speed = distancePlayerMouse
             projectile.angle = mouse_angle
 
@@ -101,7 +103,7 @@ def get_projectileStats(screen, player_1, player_2, playerTurn, projectile):
         # Checks if the projectile if moving, if not it then changes it's
         # attributes every function call:
         if projectile.moving == False:
-        
+
             projectile.speed = distancePlayerMouse
             projectile.angle = mouse_angle
 
