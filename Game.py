@@ -42,6 +42,7 @@ projectile = projectile_pokeball
 
 # Terrain
 terrain = Terrain.Terrain(background.get_rect(), screen_height)
+terrain_group = terrain.drawTerrain(screen)
 
 # ===============   LOOPING PRINCIPAL   ===============
 running = True
@@ -228,7 +229,8 @@ while running:
 
         # Drawing stuff on the screen:
         screen.blit(background, (0, 0))
-        terrain.drawTerrain(screen, dirt)
+        terrain_group.draw(screen)
+            
         projectilesDisplay_group.draw(screen)
         player_group.draw(screen)
 
