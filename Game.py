@@ -233,7 +233,7 @@ while running:
             
         projectilesDisplay_group.draw(screen)
         player_group.draw(screen)
-
+        
         get_projectileStats(screen, player_1, player_2, playerTurn, projectile)
 
         displayChosenBomb(projectilesDisplay, projectile, screen, screen_size)

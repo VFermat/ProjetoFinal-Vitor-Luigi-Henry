@@ -6,7 +6,7 @@ Created on Fri May 25 08:53:06 2018
 """
 
 import pygame
-from sprites import *
+from sprites import dirt_scaled
 
 class TerrainSprite(pygame.sprite.Sprite):
     
