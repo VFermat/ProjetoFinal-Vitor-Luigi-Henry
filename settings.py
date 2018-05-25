@@ -7,7 +7,7 @@ screen_width, screen_height = 1280, 640
 screen_size = (screen_width, screen_height)
 
 # Setting up FPS:
-framesPerSecond = 60
+framesPerSecond = 45
 
 # Variables:
 done = None

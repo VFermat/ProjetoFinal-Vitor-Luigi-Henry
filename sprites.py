@@ -46,3 +46,7 @@ projectilesDisplay = proj_D.Projectiles_Display(screen_size,
 
 projectilesDisplay_group = pygame.sprite.Group()
 projectilesDisplay_group.add(projectilesDisplay)
+
+# Dirt
+dirt = pygame.image.load("Sprites/dirt.bmp")
+dirt = pygame.transform.smoothscale(dirt, (1, 1))

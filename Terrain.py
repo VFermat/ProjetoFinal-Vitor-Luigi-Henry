@@ -11,6 +11,8 @@ import math
 
 class Terrain:
     
+    black = (0, 0, 0)
+    
     def __init__(self, background_rect, rect_height, s=35):
         self.rect = background_rect
         # maxHeight sets that the maximum of the terrain column to half of the background height
@@ -51,11 +53,10 @@ class Terrain:
                     
         return pixel_array
     
-    def blitTerrain(self, screen):
+    def drawTerrain(self, screen, picture):
         
-        terrain_group = pygame.sprite.Group()
-        
-        for width in range(len(terrain.ter)):
-            for height in range(len(terrain.ter[width])):
-                if terrain.ter[width][height] == 1:
-                    pygame.draw.rect(screen, black, pygame.Rect(width, height, 1, 1))
+        for width in range(len(self.ter)):
+            for height in range(len(self.ter[width])):
+                if self.ter[width][height] == 1:
+                    #pygame.draw.rect(screen, self.black, pygame.Rect(width, height, 1, 1))
+                    screen.blit(picture, (width, height))

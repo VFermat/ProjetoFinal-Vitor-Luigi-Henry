@@ -6,6 +6,7 @@ Created on Thu May 3 2018
 """
 
 import projectiles_display
+import Terrain
 import projectile
 import player
 import pygame
@@ -38,6 +39,9 @@ clock = pygame.time.Clock()
 
 # Variables:
 projectile = projectile_pokeball
+
+# Terrain
+terrain = Terrain.Terrain(background.get_rect(), screen_height)
 
 # ===============   LOOPING PRINCIPAL   ===============
 running = True
@@ -224,6 +228,7 @@ while running:
 
         # Drawing stuff on the screen:
         screen.blit(background, (0, 0))
+        terrain.drawTerrain(screen, dirt)
         projectilesDisplay_group.draw(screen)
         player_group.draw(screen)
 
