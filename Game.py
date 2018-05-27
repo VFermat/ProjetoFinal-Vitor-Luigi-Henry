@@ -5,13 +5,9 @@ Created on Thu May 3 2018
 @author: Henry Rocha, Vitor Eller, Luigi Portugal
 """
 
-import projectiles_display
 import Terrain
 import projectile
-import player
 import pygame
-import random
-import math
 import text_input as ti
 from TextDisplay import *
 from GameMechanics import *
@@ -24,7 +20,7 @@ from sprites import *
 import os
 # Code to center PyGame window on the screen
 os.environ['SDL_VIDEO_CENTERED'] = '1'
-
+5
 # ============= Initializing =============
 # PyGame initialization:
 pygame.init()
