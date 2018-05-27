@@ -1,17 +1,18 @@
 import pygame
-import math
 from pygame.locals import *
 
 RED = (182, 38, 37)
 BLACK = (0, 0, 0)
+font_55 = pygame.font.SysFont("None", 55)
+font_25 = pygame.font.SysFont("None", 25)
+font_20 = pygame.font.SysFont("None", 20)
+font_16 = pygame.font.SysFont("None", 16)
 
 # ============= Game Loop Functions =============
 def welcomeScreen(text, screen, screen_size):
-    # Declares the font to be used by the text
-    font = pygame.font.SysFont("None", 55)
     # Renders the text by the font chosen before
-    text1 = font.render(text[0], True, RED)
-    text2 = font.render(text[1], True, RED)
+    text1 = font_55.render(text[0], True, RED)
+    text2 = font_55.render(text[1], True, RED)
     # Gets the size of the screen
     screen_length = screen_size[0]
     screen_height = screen_size[1]
@@ -27,10 +28,8 @@ def welcomeScreen(text, screen, screen_size):
 
 # ============= Game Loop Functions =============
 def displayTopLeft_two(text, variable1, variable2, screen):
-    # Declares the font to be used by the text
-    font = pygame.font.SysFont("None", 25)
     # Renders the text by the font chosen before
-    text = font.render(text.format(variable1, variable2), True, BLACK)
+    text = font_25.render(text.format(variable1, variable2), True, BLACK)
     # Gets dimensions of the text
     text_posX, text_posY, text_lenght, text_height = text.get_rect()
     # Sticks the text to the middle of the screen
@@ -38,10 +37,8 @@ def displayTopLeft_two(text, variable1, variable2, screen):
 
 
 def displayTopRight_two(text, variable1, variable2, screen, screen_size):
-    # Declares the font to be used by the text
-    font = pygame.font.SysFont("None", 25)
     # Renders the text by the font chosen before
-    text = font.render(text.format(variable1, variable2), True, BLACK)
+    text = font_25.render(text.format(variable1, variable2), True, BLACK)
     # Gets dimensions of the text
     text_posX, text_posY, text_lenght, text_height = text.get_rect()
     # Sticks the text to the middle of the screen
@@ -50,10 +47,8 @@ def displayTopRight_two(text, variable1, variable2, screen, screen_size):
 
 def displayHeathAndName(player, screen_size, screen):
 # ===============   DISPLAY HEALTH   ===============
-    # Declares the font to be used by the text
-    font = pygame.font.SysFont("None", 20)
     # Renders the text by the font chosen before
-    text = font.render("Health: {0}".format(player.health), True, BLACK)
+    text = font_20.render("Health: {0}".format(player.health), True, BLACK)
     # Gets dimensions of the text
     text_posX, text_posY, text_lenght, text_height = text.get_rect()
     # Centers the text on top of the sprite:
@@ -62,7 +57,7 @@ def displayHeathAndName(player, screen_size, screen):
     # Sticks the text to the middle of the screen
     screen.blit(text, text_position)
 # ===============   DISPLAY NAME   ===============
-    name = font.render("{0}".format(player.name), True, BLACK)
+    name = font_20.render("{0}".format(player.name), True, BLACK)
     # Gets dimensions of the text
     name_posX, name_posY, name_lenght, name_height = name.get_rect()
     # Centers the text on top of the sprite:
@@ -72,10 +67,8 @@ def displayHeathAndName(player, screen_size, screen):
     screen.blit(name, name_position)
 
 def displayChosenBomb(projectilesDisplay, projectile, screen, screen_size):
-    # Declares the font to be used by the text
-    font = pygame.font.SysFont("None", 16)
     # Renders the text by the font chosen before
-    text = font.render("Selected", True, BLACK)
+    text = font_16.render("Selected", True, BLACK)
     # Gets dimensions of the text
     text_posX, text_posY, text_lenght, text_height = text.get_rect()
 
@@ -96,12 +89,10 @@ def displayChosenBomb(projectilesDisplay, projectile, screen, screen_size):
 
 # ============= Winner Screen Functions =============
 def displayWinnerText(text, winner, screen, screen_size):
-    # Declares the font to be used by the text
-    font = pygame.font.SysFont("None", 55)
     # Renders the text by the font chosen before
-    text1 = font.render(text[0].format(winner), True, RED)
-    text2 = font.render(text[1], True, (182, 38, 37))
-    text3 = font.render(text[2], True, (182, 38, 37))
+    text1 = font_55.render(text[0].format(winner), True, RED)
+    text2 = font_55.render(text[1], True, (182, 38, 37))
+    text3 = font_55.render(text[2], True, (182, 38, 37))
     # Gets the size of the screen
     screen_length = screen_size[0]
     screen_height = screen_size[1]

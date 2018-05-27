@@ -13,17 +13,14 @@ from pygame.locals import *
 RED = (182, 38, 37)
 BLACK = (0, 0, 0)
 WHITE = (252, 252, 252)
+font = pygame.font.SysFont("None", 35)
 
 ACCEPTED = string.ascii_letters+string.digits+string.punctuation+" "
 
-def textInputBox(name, screen, screen_size, events, turn, max_lenght=10, 
-                 font_style="None", font_size=35, font_color=WHITE):
+def textInputBox(name, screen, screen_size, events, turn, max_lenght=10):
     
     # Preparing the Screen
     screen.fill(BLACK)    
-    
-    # Creating the Base Font for all the writing
-    font = pygame.font.SysFont(font_style, font_size)
     
     # Rendering the basic texts
     if turn == 1:
