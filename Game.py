@@ -20,7 +20,7 @@ from sprites import *
 import os
 # Code to center PyGame window on the screen
 os.environ['SDL_VIDEO_CENTERED'] = '1'
-5
+
 # ============= Initializing =============
 # PyGame initialization:
 pygame.init()
@@ -35,6 +35,13 @@ clock = pygame.time.Clock()
 
 # Variables:
 projectile = projectile_pokeball
+
+# Fonts
+font_55 = pygame.font.SysFont("None", 55)
+font_35 = pygame.font.SysFont("None", 35)
+font_25 = pygame.font.SysFont("None", 25)
+font_20 = pygame.font.SysFont("None", 20)
+font_16 = pygame.font.SysFont("None", 16)
 
 # Terrain
 terrain = Terrain.Terrain(background.get_rect(), screen_height)
@@ -71,7 +78,7 @@ while running:
         screen.fill(black)
 
         # Writing text:
-        welcomeScreen(main_text, screen, screen_size)
+        welcomeScreen(main_text, screen, screen_size, font_55)
 
     # Player 1 name screen:
     elif screen_type == "Player 1 Name":
@@ -95,7 +102,7 @@ while running:
                         screen_type = "Player 2 Name"
 
         # Text input box:
-        player_1.name = ti.textInputBox(player_1.name, screen, screen_size, events, 1)
+        player_1.name = ti.textInputBox(player_1.name, screen, screen_size, events, 1, font_35)
 
     # Player 2 name screen:
     elif screen_type == "Player 2 Name":
@@ -119,7 +126,7 @@ while running:
                         screen_type = "Playing"
 
         # Text input box:
-        player_2.name = ti.textInputBox(player_2.name, screen, screen_size, events, 2)
+        player_2.name = ti.textInputBox(player_2.name, screen, screen_size, events, 2, font_35)
 
     # Game Loop:
     elif screen_type == "Playing":
@@ -232,19 +239,19 @@ while running:
         
         get_projectileStats(screen, player_1, player_2, playerTurn, projectile)
 
-        displayChosenBomb(projectilesDisplay, projectile, screen, screen_size)
+        displayChosenBomb(projectilesDisplay, projectile, screen, screen_size, font_16)
 
         displayTopLeft_two("Speed: {0}, Angle: {1}",
                            projectile.speed,
                            projectile.angle,
-                           screen)
+                           screen, font_20)
         displayTopRight_two("Turn: Player {0}",
                             playerTurn,
                             "",
                             screen,
-                            screen_size)
-        displayHeathAndName(player_1, screen_size, screen)
-        displayHeathAndName(player_2, screen_size, screen)
+                            screen_size, font_20)
+        displayHeathAndName(player_1, screen_size, screen, font_25)
+        displayHeathAndName(player_2, screen_size, screen, font_25)
 
         # Will only draw the projectile on the screen if it is moving:
         if projectile.moving == True:
@@ -273,7 +280,7 @@ while running:
                     screen_type = "Main Menu"
 
         screen.fill(black)
-        displayWinnerText(winner_text, winner, screen, screen_size)
+        displayWinnerText(winner_text, winner, screen, screen_size, font_55)
 
     # Updates display:
     pygame.display.update()

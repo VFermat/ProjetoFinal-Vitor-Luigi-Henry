@@ -13,11 +13,10 @@ from pygame.locals import *
 RED = (182, 38, 37)
 BLACK = (0, 0, 0)
 WHITE = (252, 252, 252)
-font = pygame.font.SysFont("None", 35)
 
 ACCEPTED = string.ascii_letters+string.digits+string.punctuation+" "
 
-def textInputBox(name, screen, screen_size, events, turn, max_lenght=10):
+def textInputBox(name, screen, screen_size, events, turn, font, max_lenght=10):
     
     # Preparing the Screen
     screen.fill(BLACK)    
