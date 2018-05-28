@@ -13,7 +13,7 @@ from pygame.locals import *
 RED = (182, 38, 37)
 BLACK = (0, 0, 0)
 WHITE = (252, 252, 252)
-font = pygame.font.SysFont("None", 35)
+font_35 = pygame.font.SysFont("None", 35)
 
 ACCEPTED = string.ascii_letters+string.digits+string.punctuation+" "
 
@@ -27,9 +27,9 @@ def textInputBox(name, screen, screen_size, events, turn, max_lenght=10):
         text1 = "Please Type Player 1's Name."
     else:
         text1 = "Please Type Player 2's Name."
-    rendered_text1 = font.render(text1, True, RED)
+    rendered_text1 = font_35.render(text1, True, RED)
     text2 = "Press Enter When You're Ready."
-    rendered_text2 = font.render(text2, True, RED)
+    rendered_text2 = font_35.render(text2, True, RED)
     
     # Gets the text rect, so we can center it to the screen
     screen_lenght = screen_size[0]
@@ -56,7 +56,7 @@ def textInputBox(name, screen, screen_size, events, turn, max_lenght=10):
                     name += event.unicode
     
     # Rendering Player's name and getting its positions
-    player_name = font.render(name, True, RED)
+    player_name = font_35.render(name, True, RED)
     name_posX, name_posY, name_lenght, name_height = player_name.get_rect()
     
     # Blitting the player Name
