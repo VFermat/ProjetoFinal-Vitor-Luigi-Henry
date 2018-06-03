@@ -5,19 +5,20 @@ Created on Thu May 3 2018
 @author: Henry Rocha, Vitor Eller, Luigi Portugal
 """
 
+# Import needed to center PyGame's window
+import os
+import pygame
+from pygame.locals import *
+
 import Terrain
 import projectile
-import pygame
 import text_input as ti
 from TextDisplay import *
 from GameMechanics import *
-from pygame.locals import *
 
 from settings import *
 from sprites import *
 
-# Import needed to center PyGame's window
-import os
 # Code to center PyGame window on the screen
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 
@@ -198,8 +199,8 @@ while running:
                     winner = player_1.name
                     screen_type = "Game End"
 
-            if done == False:
-                if projectile.moving == False:
+            if not done:
+                if not projectile.moving:
                     projectile.reset_stats()
                     projectile_group, projectile = reset_projectile(projectile_group, projectile_pokeball)
                     playerTurn = "2"
@@ -223,8 +224,8 @@ while running:
                     winner = player_2.name
                     screen_type = "Game End"
 
-            if done == False:
-                if projectile.moving == False:
+            if not done:
+                if not projectile.moving:
                     projectile.reset_stats()
                     projectile_group, projectile = reset_projectile(projectile_group, projectile_pokeball)
                     playerTurn = "1"
@@ -254,7 +255,7 @@ while running:
         displayHeathAndName(player_2, screen_size, screen, font_25)
 
         # Will only draw the projectile on the screen if it is moving:
-        if projectile.moving == True:
+        if projectile.moving:
             projectile_group.draw(screen)
             projectile.update()
 

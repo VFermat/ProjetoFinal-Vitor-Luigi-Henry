@@ -3,6 +3,7 @@ from pygame.locals import *
 
 RED = (182, 38, 37)
 BLACK = (0, 0, 0)
+pygame.font.init()
 
 # ============= Game Loop Functions =============
 def welcomeScreen(text, screen, screen_size, font):
