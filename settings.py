@@ -1,39 +1,53 @@
+import pygame
+from pygame.locals import *
 
-# Sets window's title:
-windowTitle = "Foxy"
+# Sets the window's title:
+windowTitle = "Avengers"
 
-# Screen settings:
-screen_width, screen_height = 1280, 640
+# Sets the screen settings:
+screen_width, screen_height = 1260, 640
 screen_size = (screen_width, screen_height)
 
-# Setting up FPS:
-framesPerSecond = 45
+# Sets the game's FPS:
+framesPerSecond = 60
 
-# Variables:
-done = None
-playerHit = None
-winner = None
+# Color settings:
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+GRAY = (64, 64, 64)
+YELLOW = (255, 255, 0)
+BLUE = (0, 0, 255)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+CYAN = (0, 255, 255)
+PINK = (255, 0, 255)
+
+# Player settings:
+playerScale = 1
 playerTurn = "1"
 
-# Colors:
-black = (0, 0, 0)
-red = (182, 38, 37)
-white = (255, 255, 255)
-gray = (64, 64, 64)
+# Terrain Settings:
+terrainCollision = True
+blockScale = 0.1
+terrainPreset = 1
+terrainGenRandom = True
+minTerrainHeight = 1
+maxTerrainHeight = 50
+smooth_factor = 4
+
+# Action Bar settings:
+showBombSelector = True
+
+actionBarScale = 1.5
+actionBarPosition = "top_center"
+
+iconPokeballScale = 1
+iconPurpleballScale = 0.75
+
+# Game settings:
+done = None
+winner = None
+loser = None
 
 # Main Screen:
-main_text = ("Welcome to Foxy!",
-             "Press Enter to Play.")
-
-# Winner Text:
-winner_text = ("The Winner Is: {0}!!",
-               "Congrats on Winning the Game!",
-               "Please Press Enter and Restart the Game")
-
-# Screen_type sets which screen we are using:
-# Screen type = "Main Menu"
-# Screen type = "Player 1 Name"
-# Screen type = "Player 2 Name"
-# Screen type = "Playing"
-# Screen type = "Game End"
-screen_type = "Main Menu"
+game_screen = "Main Screen"

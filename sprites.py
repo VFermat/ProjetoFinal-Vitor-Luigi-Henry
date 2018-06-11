@@ -1,52 +1,126 @@
 import pygame
-from pygame.locals import *
-
-import player
-import projectile
-import projectiles_display as proj_D
 from settings import *
+from pygame.locals import *
+import class_bomb as bomb
+import class_player as player
+import class_button as button
+import class_terrain as terrain
+import class_actionBar as actionBar
+import class_background as background
+import class_bombDisplay as bombDisplay
 
 # Background settings:
-background = pygame.image.load("Sprites/flat_background_1280x640.png")
+background = background.Background("Sprites/BG_StarryNight_1280x640.png", 0, 0)
 
 # Player settings:
-player_1 = player.Player("Sprites/Fiona_Red_Right.png",
-                         10,
-                         490)
+player1Right = []
+for counter in range(1, 5):
+    imagePath = 'Sprites/Captain America Sprites/CaptainAmerica_Right_' + str(counter) + '.png'
+    image = pygame.image.load(imagePath)
+    rect = image.get_rect()
+    new_scale = (rect.width * playerScale, rect.height * playerScale)
 
-player_2 = player.Player("Sprites/Fiona_Blue_Left.png",
-                         1280 - 100,
-                         490)
+    image = pygame.transform.scale(image, new_scale)
+    player1Right.append(image)
 
-player_group = pygame.sprite.Group()
-player_group.add(player_1, player_2)
+player1Left = []
+for counter in range(1, 5):
+    imagePath = 'Sprites/Captain America Sprites/CaptainAmerica_Left_' + str(counter) + '.png'
+    image = pygame.image.load(imagePath)
+    rect = image.get_rect()
+    new_scale = (rect.width * playerScale, rect.height * playerScale)
+
+    image = pygame.transform.scale(image, new_scale)
+    player1Left.append(image)
+
+player_1 = player.Player(player1Right, player1Left,
+                         0, 0,
+                         screen_size,
+                         100,
+                         "Captain America")
+
+
+player2Right = []
+for counter in range(1, 5):
+    imagePath = 'Sprites/Iron Man Sprites/IronMan_Right_' + str(counter) + '.png'
+    image = pygame.image.load(imagePath)
+    rect = image.get_rect()
+    new_scale = (rect.width * playerScale, rect.height * playerScale)
+
+    image = pygame.transform.scale(image, new_scale)
+    player2Right.append(image)
+
+player2Left = []
+for counter in range(1, 5):
+    imagePath = 'Sprites/Iron Man Sprites/IronMan_Left_' + str(counter) + '.png'
+    image = pygame.image.load(imagePath)
+    rect = image.get_rect()
+    new_scale = (rect.width * playerScale, rect.height * playerScale)
+
+    image = pygame.transform.scale(image, new_scale)
+    player2Left.append(image)
+
+player_2 = player.Player(player2Right, player2Left,
+                         600, 0,
+                         screen_size,
+                         100,
+                         "Iron Man")
+
+players_group = pygame.sprite.Group()
+players_group.add(player_1)
+players_group.add(player_2)
+
+# Action Bar:
+actionBar = actionBar.ActionBar("Sprites/ActionBar5_210x41.png", screen_size,
+                                actionBarScale, actionBarPosition)
+actionBar_group = pygame.sprite.Group()
+actionBar_group.add(actionBar)
+
+# Bomb 1:
+iconPokeball = bombDisplay.BombDisplay("Sprites/pokeball.png", iconPokeballScale)
+iconPokeball.rect.center = actionBar.slot1
+
+actionBar_group.add(iconPokeball)
+
+# Bomb 2:
+iconPurpleball = bombDisplay.BombDisplay("Sprites/Purple_Ball_50x50.png", iconPurpleballScale)
+iconPurpleball.rect.center = actionBar.slot2
+
+actionBar_group.add(iconPurpleball)
+
+# Terrain:
+terrain = terrain.Terrain("Sprites/DirtBlock_70x70.png", blockScale, screen_size, smooth_factor)
+if terrainGenRandom == True:
+    terrain.generateHeightsRandom(minTerrainHeight, maxTerrainHeight)
+else:
+    terrain.generateHeightsPreset(terrainPreset)
+
+# Buttons:
+button_group = pygame.sprite.Group()
+
+start_button = button.Button("Sprites/Buttons/Start_Button.png", screen_size, 1, "center_top3")
+button_group.add(start_button)
+settings_button = button.Button("Sprites/Buttons/Settings_Button.png", screen_size, 1, "center_top")
+button_group.add(settings_button)
+exit_button = button.Button("Sprites/Buttons/Exit_Button.png", screen_size, 1, "center_bottom2")
+button_group.add(exit_button)
 
 # Projectile settings:
-projectile_pokeball = projectile.Projectile(screen_size,
-                                            "Sprites/pokeball.png",
-                                            "pokeball",
-                                            0, 0,
-                                            10,
-                                            150)
+bomb_pokeball = bomb.Bomb(screen_size,
+                          "Sprites/pokeball.png",
+                          1,
+                          "pokeball",
+                          0, 0,
+                          10,
+                          150)
 
-projectile_purpleball = projectile.Projectile(screen_size,
-                                              "Sprites/purple_ball_50x50.png",
-                                              "purpleball",
-                                              0, 0,
-                                              15,
-                                              120)
+bomb_purpleball = bomb.Bomb(screen_size,
+                            "Sprites/purple_ball_50x50.png",
+                            0.5,
+                            "purpleball",
+                            0, 0,
+                            15,
+                            120)
 
-projectile_group = pygame.sprite.Group()
-projectile_group.add(projectile_pokeball)
-
-# Projectiles display settings:
-projectilesDisplay = proj_D.Projectiles_Display(screen_size,
-                                                "Sprites/AllBombs_50x50.png",
-                                                0, 0)
-
-projectilesDisplay_group = pygame.sprite.Group()
-projectilesDisplay_group.add(projectilesDisplay)
-
-# Dirt
-dirt = pygame.image.load("Sprites/dirt.bmp")
-dirt_scaled = pygame.transform.smoothscale(dirt, (1, 1))
+bomb_group = pygame.sprite.Group()
+bomb_group.add(bomb_pokeball)
