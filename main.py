@@ -156,6 +156,7 @@ while running:
                 player_2.standing = False
 
             if pygame.sprite.spritecollide(bomb, terrain.terrain_group, False):
+                lastBombPosition = bomb.rect.center
                 bomb.stop_movement()
 
         # Gets mouse position:
@@ -236,6 +237,7 @@ while running:
             # Checks for collision, if theres is any, stops bomb movement and
             # does damage to the enemy:
             if pygame.sprite.collide_rect(bomb, player_2):
+                lastBombPosition = bomb.rect.center
                 bomb.stop_movement()
                 player_2.health -= bomb.damage
                 # Checks if there is a winner
@@ -267,6 +269,7 @@ while running:
             # Checks for collision, if theres is any, stops bomb movement and
             # does damage to the enemy:
             if pygame.sprite.collide_rect(bomb, player_1):
+                lastBombPosition = bomb.rect.center
                 bomb.stop_movement()
                 player_1.health -= bomb.damage
                 # Checks if there is a winner

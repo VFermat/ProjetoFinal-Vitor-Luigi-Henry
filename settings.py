@@ -53,5 +53,8 @@ done = None
 winner = None
 loser = None
 
+# Bomb settings:
+lastBombPosition = (0, 0)
+
 # Main Screen:
 game_screen = "Main Screen"
