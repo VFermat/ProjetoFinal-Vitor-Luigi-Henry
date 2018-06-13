@@ -6,6 +6,7 @@ import class_player as player
 import class_button as button
 import class_terrain as terrain
 import class_actionBar as actionBar
+import class_explosion as explosion
 import class_background as background
 import class_bombDisplay as bombDisplay
 
@@ -177,3 +178,5 @@ for counter in range(1, 13):
 
     image = pygame.transform.scale(image, new_scale)
     explosionFrames.append(image)
+
+explosion = explosion.Explosion(explosionFrames)
