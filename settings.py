@@ -56,5 +56,8 @@ loser = None
 # Bomb settings:
 lastBombPosition = (0, 0)
 
+# Explosion settings:
+explosionScale = 1
+
 # Main Screen:
 game_screen = "Main Screen"

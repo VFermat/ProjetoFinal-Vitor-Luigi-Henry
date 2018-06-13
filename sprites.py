@@ -88,19 +88,19 @@ iconPurpleball.rect.center = actionBar.slot2
 
 actionBar_group.add(iconPurpleball)
 
-#Bomb 3:
+# Bomb 3:
 iconCrazyball = bombDisplay.BombDisplay("Sprites/bomba_loca.png", iconCrazyballScale)
 iconCrazyball.rect.center = actionBar.slot3
 
 actionBar_group.add(iconCrazyball)
 
-#Bomb 4:
+# Bomb 4:
 iconNeutronball = bombDisplay.BombDisplay("Sprites/grav_bomb.png", iconNeutronballScale)
 iconNeutronball.rect.center = actionBar.slot4
 
 actionBar_group.add(iconNeutronball)
 
-#Bomb 5:
+# Bomb 5:
 iconCrashball = bombDisplay.BombDisplay("Sprites/bomba_crash.png", iconCrashballScale)
 iconCrashball.rect.center = actionBar.slot5
 
@@ -166,3 +166,14 @@ bomb_neutron = bomb.Bomb(screen_size,
 
 bomb_group = pygame.sprite.Group()
 bomb_group.add(bomb_pokeball)
+
+# Explosion animation:
+explosionFrames = []
+for counter in range(1, 13):
+    imagePath = 'Sprites/Explosion/Explosion_' + str(counter) + '.png'
+    image = pygame.image.load(imagePath)
+    rect = image.get_rect()
+    new_scale = (rect.width * explosionScale, rect.height * explosionScale)
+
+    image = pygame.transform.scale(image, new_scale)
+    explosionFrames.append(image)
