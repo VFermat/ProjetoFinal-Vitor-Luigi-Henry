@@ -108,7 +108,7 @@ button_group.add(exit_button)
 # Projectile settings:
 bomb_pokeball = bomb.Bomb(screen_size,
                           "Sprites/pokeball.png",
-                          1,
+                          0.7,
                           "pokeball",
                           0, 0,
                           10,
@@ -116,7 +116,7 @@ bomb_pokeball = bomb.Bomb(screen_size,
 
 bomb_purpleball = bomb.Bomb(screen_size,
                             "Sprites/purple_ball_50x50.png",
-                            0.5,
+                            0.35,
                             "purpleball",
                             0, 0,
                             15,

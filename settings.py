@@ -21,6 +21,7 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 CYAN = (0, 255, 255)
 PINK = (255, 0, 255)
+INFINANCE = (172, 58, 56)
 
 # Player settings:
 playerScale = 1
@@ -28,11 +29,11 @@ playerTurn = "1"
 
 # Terrain Settings:
 terrainCollision = True
-blockScale = 0.1
+blockScale = 0.2
 terrainPreset = 1
 terrainGenRandom = True
 minTerrainHeight = 1
-maxTerrainHeight = 50
+maxTerrainHeight = 35
 smooth_factor = 4
 
 # Action Bar settings:

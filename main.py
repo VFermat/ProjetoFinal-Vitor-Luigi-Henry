@@ -205,15 +205,15 @@ while running:
         # Players turn:
         if playerTurn == "1":
             # If pressed key is D:
-            if pressed_keys[K_d]:
+            if pressed_keys[K_d] and not bomb.moving:
                 player_1.move("right")
             # If pressed key is A:
-            if pressed_keys[K_a]:
+            if pressed_keys[K_a] and not bomb.moving:
                 player_1.move("left")
 
             # Drawing the line between player and mouse position:
             get_distance(player_1.rect.center, mousePosition)
-            pygame.draw.line(screen, BLACK, player_1.rect.center, mousePosition, 5)
+            pygame.draw.line(screen, INFINANCE, player_1.rect.center, mousePosition, 5)
 
             # Checks for collision, if theres is any, stops bomb movement and
             # does damage to the enemy:
@@ -236,10 +236,10 @@ while running:
 
         elif playerTurn == "2":
             # If pressed key is RIGHT arrow:
-            if pressed_keys[K_RIGHT]:
+            if pressed_keys[K_RIGHT] and not bomb.moving:
                 player_2.move("right")
             # If pressed key is LEFT arrow:
-            if pressed_keys[K_LEFT]:
+            if pressed_keys[K_LEFT] and not bomb.moving:
                 player_2.move("left")
 
             # Drawing the line between player and mouse position:
@@ -321,7 +321,7 @@ while running:
                     player_2.resetHealth()
 
                     # Changes screen:
-                    game_screen = "Main Menu"
+                    game_screen = "Main Screen"
 
         # Drawing the background:
         screen.fill(GRAY)
