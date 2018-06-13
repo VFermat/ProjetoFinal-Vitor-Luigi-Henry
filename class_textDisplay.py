@@ -144,3 +144,19 @@ class TextDisplay():
 
         # Sticks the text to the screen:
         screen.blit(text, textPosition)
+        
+    def displayDistance(self, COLOR, screen, distance, angle, mouse_position):
+        # Creates the text string:
+        text = "Distance: {0}".format(distance)
+        text2 = "Angle: {0}".format(angle)
+        
+        # Renders the text by the font chosen before
+        text = self.font_26.render(text, True, COLOR)
+        text2 = self.font_26.render(text2, True, COLOR)
+        text_2_x = mouse_position[0]
+        text_2_y = mouse_position[1] + text2.get_rect()[3]
+        text_2_pos = (text_2_x, text_2_y)
+        
+        # Blits the text:
+        screen.blit(text, mouse_position)
+        screen.blit(text2, text_2_pos)

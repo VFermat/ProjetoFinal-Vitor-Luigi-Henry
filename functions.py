@@ -48,7 +48,7 @@ def get_distance(origin, destination):
         x_dist = destination[0] - origin[0]
         y_dist = destination[1] - origin[1]
         distance = ((x_dist)**2 + (y_dist)**2)**(1/2)
-        return distance
+        return distance/2
 
     # Checks if x2 < x1:
     elif destination[0] <= origin[0]:
@@ -56,7 +56,7 @@ def get_distance(origin, destination):
         x_dist = origin[0] - destination[0]
         y_dist = origin[1] - destination[1]
         distance = ((x_dist)**2 + (y_dist)**2)**(1/2)
-        return distance
+        return distance/2
 
 
 def reset_bomb(group, default_bomb):

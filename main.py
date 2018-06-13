@@ -218,7 +218,7 @@ while running:
                     if bomb.moving == False:
                         bomb = bomb_crash
                         bomb_group.empty()
-                        bomb_group.add(bomb_crash5)
+                        bomb_group.add(bomb_crash)
 
         # Players turn:
         if playerTurn == "1":
@@ -251,6 +251,12 @@ while running:
                     bomb_group, bomb = reset_bomb(bomb_group, bomb_pokeball)
                     playerTurn = "2"
                     done = True
+            
+            speed = round(get_distance(player_1.rect.center, mousePosition), 2)
+            if speed > bomb.maxSpeed:
+                speed = bomb.maxSpeed
+            angle = round(get_angle(player_1.rect.center, mousePosition, "degrees"), 2)
+            text.displayDistance(WHITE, screen, speed, angle, mousePosition)
 
         elif playerTurn == "2":
             # If pressed key is RIGHT arrow:
@@ -282,6 +288,13 @@ while running:
                     bomb_group, bomb = reset_bomb(bomb_group, bomb_pokeball)
                     playerTurn = "1"
                     done = True
+                    
+            # Blits distance:
+            speed = round(get_distance(player_2.rect.center, mousePosition), 2)
+            if speed > bomb.maxSpeed:
+                speed = bomb.maxSpeed
+            angle = round(get_angle(player_2.rect.center, mousePosition, "degrees"), 2)
+            text.displayDistance(WHITE, screen, speed, angle, mousePosition)
 
         # Drawing the background:
         screen.blit(background.image, (0, 0))
