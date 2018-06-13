@@ -201,6 +201,24 @@ while running:
                         bomb = bomb_purpleball
                         bomb_group.empty()
                         bomb_group.add(bomb_purpleball)
+                        
+                if event.key == pygame.K_3:
+                    if bomb.moving == False:
+                        bomb = bomb_crazy
+                        bomb_group.empty()
+                        bomb_group.add(bomb_crazy)
+                        
+                if event.key == pygame.K_4:
+                    if bomb.moving == False:
+                        bomb = bomb_neutron
+                        bomb_group.empty()
+                        bomb_group.add(bomb_neutron)
+                        
+                if event.key == pygame.K_5:
+                    if bomb.moving == False:
+                        bomb = bomb_crash
+                        bomb_group.empty()
+                        bomb_group.add(bomb_crash5)
 
         # Players turn:
         if playerTurn == "1":
@@ -244,7 +262,7 @@ while running:
 
             # Drawing the line between player and mouse position:
             get_distance(player_1.rect.center, mousePosition)
-            pygame.draw.line(screen, BLACK, player_2.rect.center, mousePosition, 5)
+            pygame.draw.line(screen, INFINANCE, player_2.rect.center, mousePosition, 5)
 
             # Checks for collision, if theres is any, stops bomb movement and
             # does damage to the enemy:
@@ -283,6 +301,21 @@ while running:
 
             elif bomb.name == "purpleball":
                 selectorPos = (round(actionBar.slot2[0]), round(actionBar.slot2[1]))
+                selectorRadius = round(actionBar.rect.height/2.5)
+                pygame.draw.circle(screen, BLUE, selectorPos, selectorRadius, 2)
+                
+            elif bomb.name == "crazy":
+                selectorPos = (round(actionBar.slot3[0]), round(actionBar.slot3[1]))
+                selectorRadius = round(actionBar.rect.height/2.5)
+                pygame.draw.circle(screen, BLUE, selectorPos, selectorRadius, 2)
+                
+            elif bomb.name == "neutron":
+                selectorPos = (round(actionBar.slot4[0]), round(actionBar.slot4[1]))
+                selectorRadius = round(actionBar.rect.height/2.5)
+                pygame.draw.circle(screen, BLUE, selectorPos, selectorRadius, 2)
+                
+            elif bomb.name == "crash":
+                selectorPos = (round(actionBar.slot5[0]), round(actionBar.slot5[1]))
                 selectorRadius = round(actionBar.rect.height/2.5)
                 pygame.draw.circle(screen, BLUE, selectorPos, selectorRadius, 2)
 

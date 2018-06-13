@@ -9,7 +9,7 @@ screen_width, screen_height = 1260, 640
 screen_size = (screen_width, screen_height)
 
 # Sets the game's FPS:
-framesPerSecond = 60
+framesPerSecond = 90
 
 # Color settings:
 WHITE = (255, 255, 255)
@@ -29,12 +29,12 @@ playerTurn = "1"
 
 # Terrain Settings:
 terrainCollision = True
-blockScale = 0.2
+blockScale = 0.15
 terrainPreset = 1
 terrainGenRandom = True
 minTerrainHeight = 1
-maxTerrainHeight = 35
-smooth_factor = 4
+maxTerrainHeight = 40
+smooth_factor = 5
 
 # Action Bar settings:
 showBombSelector = True
@@ -44,6 +44,9 @@ actionBarPosition = "top_center"
 
 iconPokeballScale = 1
 iconPurpleballScale = 0.75
+iconCrazyballScale = 0.1
+iconNeutronballScale = 0.1
+iconCrashballScale = 0.17
 
 # Game settings:
 done = None

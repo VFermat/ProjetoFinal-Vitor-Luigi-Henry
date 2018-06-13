@@ -88,6 +88,24 @@ iconPurpleball.rect.center = actionBar.slot2
 
 actionBar_group.add(iconPurpleball)
 
+#Bomb 3:
+iconCrazyball = bombDisplay.BombDisplay("Sprites/bomba_loca.png", iconCrazyballScale)
+iconCrazyball.rect.center = actionBar.slot3
+
+actionBar_group.add(iconCrazyball)
+
+#Bomb 4:
+iconNeutronball = bombDisplay.BombDisplay("Sprites/grav_bomb.png", iconNeutronballScale)
+iconNeutronball.rect.center = actionBar.slot4
+
+actionBar_group.add(iconNeutronball)
+
+#Bomb 5:
+iconCrashball = bombDisplay.BombDisplay("Sprites/bomba_crash.png", iconCrashballScale)
+iconCrashball.rect.center = actionBar.slot5
+
+actionBar_group.add(iconCrashball)
+
 # Terrain:
 terrain = terrain.Terrain("Sprites/DirtBlock_70x70.png", blockScale, screen_size, smooth_factor)
 if terrainGenRandom == True:
@@ -106,6 +124,14 @@ exit_button = button.Button("Sprites/Buttons/Exit_Button.png", screen_size, 1, "
 button_group.add(exit_button)
 
 # Projectile settings:
+bomb_crash = bomb.Bomb(screen_size,
+                       "Sprites/bomba_crash.png",
+                       0.1,
+                       "crash",
+                       0, 0,
+                       5,
+                       200)
+
 bomb_pokeball = bomb.Bomb(screen_size,
                           "Sprites/pokeball.png",
                           0.7,
@@ -121,6 +147,22 @@ bomb_purpleball = bomb.Bomb(screen_size,
                             0, 0,
                             15,
                             120)
+
+bomb_crazy = bomb.Bomb(screen_size,
+                       "Sprites/bomba_loca.png",
+                       0.06,
+                       "crazy",
+                       0, 0,
+                       20,
+                       100)
+
+bomb_neutron = bomb.Bomb(screen_size,
+                         "Sprites/grav_bomb.png",
+                         0.06,
+                         "neutron",
+                         0, 0,
+                         25,
+                         50)
 
 bomb_group = pygame.sprite.Group()
 bomb_group.add(bomb_pokeball)
