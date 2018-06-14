@@ -180,5 +180,8 @@ for counter in range(1, 14):
     explosionFrames.append(image)
 
 explosion = explosion.Explosion(explosionFrames)
+<<<<<<< HEAD
 explosion_group = pygame.sprite.Group()
 explosion_group.add(explosion)
+=======
+>>>>>>> d8e63d3913162865ce54106c55393941b8debf3b
