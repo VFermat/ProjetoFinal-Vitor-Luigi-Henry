@@ -161,7 +161,7 @@ bomb_neutron = bomb.Bomb(screen_size,
                          "neutron",
                          0, 0,
                          25,
-                         50)
+                         75)
 
 bomb_group = pygame.sprite.Group()
 bomb_group.add(bomb_crash)

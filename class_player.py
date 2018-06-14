@@ -37,9 +37,10 @@ class Player(pygame.sprite.Sprite):
         self.originalHealth = health
         self.health = health
         self.name = playerName
+        self.movements = 0
 
     def move(self, direction):
-        if direction == "right":
+        if direction == "right" and self.movements < 30:
             self.rect.x += 5
 
             if self.frame in range(1, 4):
@@ -60,8 +61,10 @@ class Player(pygame.sprite.Sprite):
             self.frame += 1
 
             self.image = self.spriteRight[self.displayNumber]
+            
+            self.movements += 1
 
-        if direction == "left":
+        if direction == "left" and self.movements < 30:
             self.rect.x -= 5
 
             if self.frame in range(1, 4):
@@ -82,10 +85,13 @@ class Player(pygame.sprite.Sprite):
             self.frame += 1
 
             self.image = self.spriteLeft[self.displayNumber]
+            
+            self.movements += 1
 
     def gravityFall(self):
         if self.standing == False:
             self.rect.y += self.gravity
 
-    def resetHealth(self):
+    def resetPlayer(self):
         self.health = self.originalHealth
+        self.movements = 0

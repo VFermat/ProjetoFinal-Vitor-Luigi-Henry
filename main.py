@@ -258,6 +258,7 @@ while running:
                     bomb_group, bomb = reset_bomb(bomb_group, bomb_pokeball)
                     playerTurn = "2"
                     done = True
+                    player_1.movements = 0
 
         elif playerTurn == "2":
             # If pressed key is RIGHT arrow:
@@ -291,6 +292,7 @@ while running:
                     bomb_group, bomb = reset_bomb(bomb_group, bomb_pokeball)
                     playerTurn = "1"
                     done = True
+                    player_2.movements = 0
 
         # Drawing the background:
         screen.blit(background.image, (0, 0))
@@ -380,8 +382,8 @@ while running:
                 # Checks if the key pressed was the ENTER key:
                 if event.key == pygame.K_RETURN:
                     # Resets player's health:
-                    player_1.resetHealth()
-                    player_2.resetHealth()
+                    player_1.resetPlayer()
+                    player_2.resetPlayer()
 
                     # Changes screen:
                     game_screen = "Main Screen"
