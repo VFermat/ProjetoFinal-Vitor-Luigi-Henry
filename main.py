@@ -347,6 +347,12 @@ while running:
         text.displayHealthAndName(WHITE, player_1, screen, screen_size)
         text.displayHealthAndName(WHITE, player_2, screen, screen_size)
         
+        # Displaying Movements Left:
+        if playerTurn == "1":
+            text.displayMovementsLeft(WHITE, screen, 30 - player_1.movements)
+        elif playerTurn == "2":
+            text.displayMovementsLeft(WHITE, screen, 30 - player_2.movements)
+        
         # DIsplaying bomb's speed and angle
         if playerTurn == "1":
             speed = round(get_distance(player_1.rect.center, mousePosition), 2)

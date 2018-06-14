@@ -40,53 +40,59 @@ class Player(pygame.sprite.Sprite):
         self.movements = 0
 
     def move(self, direction):
-        if direction == "right" and self.movements < 30:
-            self.rect.x += 5
-
-            if self.frame in range(1, 4):
-                self.displayNumber = 0
-
-            elif self.frame in range(4, 7):
-                self.displayNumber = 1
-
-            elif self.frame in range(7, 10):
-                self.displayNumber = 2
-
-            elif self.frame in range(10, 13):
-                self.displayNumber = 3
-
-            if self.frame > 12:
-                self.frame = -1
-
-            self.frame += 1
-
-            self.image = self.spriteRight[self.displayNumber]
-            
-            self.movements += 1
-
-        if direction == "left" and self.movements < 30:
-            self.rect.x -= 5
-
-            if self.frame in range(1, 4):
-                self.displayNumber = 0
-
-            elif self.frame in range(4, 7):
-                self.displayNumber = 1
-
-            elif self.frame in range(7, 10):
-                self.displayNumber = 2
-
-            elif self.frame in range(10, 13):
-                self.displayNumber = 3
-
-            if self.frame > 12:
-                self.frame = -1
-
-            self.frame += 1
-
-            self.image = self.spriteLeft[self.displayNumber]
-            
-            self.movements += 1
+        if self.rect.x > 0 and self.rect.x < 1260:
+            if direction == "right" and self.movements < 30:
+                self.rect.x += 5
+    
+                if self.frame in range(1, 4):
+                    self.displayNumber = 0
+    
+                elif self.frame in range(4, 7):
+                    self.displayNumber = 1
+    
+                elif self.frame in range(7, 10):
+                    self.displayNumber = 2
+    
+                elif self.frame in range(10, 13):
+                    self.displayNumber = 3
+    
+                if self.frame > 12:
+                    self.frame = -1
+    
+                self.frame += 1
+    
+                self.image = self.spriteRight[self.displayNumber]
+                
+                self.movements += 1
+    
+            if direction == "left" and self.movements < 30:
+                self.rect.x -= 5
+    
+                if self.frame in range(1, 4):
+                    self.displayNumber = 0
+    
+                elif self.frame in range(4, 7):
+                    self.displayNumber = 1
+    
+                elif self.frame in range(7, 10):
+                    self.displayNumber = 2
+    
+                elif self.frame in range(10, 13):
+                    self.displayNumber = 3
+    
+                if self.frame > 12:
+                    self.frame = -1
+    
+                self.frame += 1
+    
+                self.image = self.spriteLeft[self.displayNumber]
+                
+                self.movements += 1
+        else:
+            if self.rect.x <= 0:
+                self.rect.x += 1
+            else:
+                self.rect.x -= 1
 
     def gravityFall(self):
         if self.standing == False:

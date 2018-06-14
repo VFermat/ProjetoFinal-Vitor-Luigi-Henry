@@ -160,3 +160,16 @@ class TextDisplay():
         # Blits the text:
         screen.blit(text, mouse_position)
         screen.blit(text2, text_2_pos)
+        
+    def displayMovementsLeft(self, COLOR, screen, movements_left):
+        # Creates the text string:
+        text = "Movimentos: {0}".format(movements_left)
+        
+        # Renders the text by the font chosen before
+        text = self.font_26.render(text, True, COLOR)
+        
+        # Gets Position:
+        textPosition = (0, 0)
+        
+        # Blits the text:
+        screen.blit(text, textPosition)
