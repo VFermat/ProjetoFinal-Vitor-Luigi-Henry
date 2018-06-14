@@ -350,8 +350,11 @@ while running:
         # Drawing the explosion:
         if bombHit == True:
             explosion.animate(lastBombPosition)
+<<<<<<< HEAD
             if explosion.displayNumber == 12:
                 bombHit = False
+=======
+>>>>>>> d8e63d3913162865ce54106c55393941b8debf3b
 
         # Displaying names and health:
         text.displayHealthAndName(WHITE, player_1, screen, screen_size)

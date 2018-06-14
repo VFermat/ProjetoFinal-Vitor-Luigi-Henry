@@ -55,6 +55,7 @@ loser = None
 
 # Bomb settings:
 lastBombPosition = (0, 0)
+bombHit = False
 
 # Explosion settings:
 explosionScale = 1
