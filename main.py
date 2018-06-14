@@ -257,7 +257,7 @@ while running:
             if done == False:
                 if bomb.moving == False:
                     bomb.reset_stats()
-                    bomb_group, bomb = reset_bomb(bomb_group, bomb_pokeball)
+                    bomb_group, bomb = reset_bomb(bomb_group, bomb_crash)
                     playerTurn = "2"
                     done = True
                     player_1.movements = 0
@@ -291,7 +291,7 @@ while running:
             if done == False:
                 if bomb.moving == False:
                     bomb.reset_stats()
-                    bomb_group, bomb = reset_bomb(bomb_group, bomb_pokeball)
+                    bomb_group, bomb = reset_bomb(bomb_group, bomb_crash)
                     playerTurn = "1"
                     done = True
                     player_2.movements = 0
