@@ -31,6 +31,8 @@ spriteCount = 0
 # Bomb settings:
 bomb = bomb_pokeball
 
+bombHit = None
+
 # MAIN LOOP
 # ==============================================================================
 running = True
@@ -157,6 +159,7 @@ while running:
 
             if pygame.sprite.spritecollide(bomb, terrain.terrain_group, False):
                 lastBombPosition = bomb.rect.center
+                bombHit = True
                 bomb.stop_movement()
 
         # Gets mouse position:
@@ -238,6 +241,7 @@ while running:
             # does damage to the enemy:
             if pygame.sprite.collide_rect(bomb, player_2):
                 lastBombPosition = bomb.rect.center
+                bombHit = True
                 bomb.stop_movement()
                 player_2.health -= bomb.damage
                 # Checks if there is a winner
@@ -253,7 +257,7 @@ while running:
                     bomb_group, bomb = reset_bomb(bomb_group, bomb_pokeball)
                     playerTurn = "2"
                     done = True
-            
+
             speed = round(get_distance(player_1.rect.center, mousePosition), 2)
             if speed > bomb.maxSpeed:
                 speed = bomb.maxSpeed
@@ -276,6 +280,7 @@ while running:
             # does damage to the enemy:
             if pygame.sprite.collide_rect(bomb, player_1):
                 lastBombPosition = bomb.rect.center
+                bombHit = True
                 bomb.stop_movement()
                 player_1.health -= bomb.damage
                 # Checks if there is a winner
@@ -291,7 +296,7 @@ while running:
                     bomb_group, bomb = reset_bomb(bomb_group, bomb_pokeball)
                     playerTurn = "1"
                     done = True
-                    
+
             # Blits distance:
             speed = round(get_distance(player_2.rect.center, mousePosition), 2)
             if speed > bomb.maxSpeed:
@@ -342,12 +347,19 @@ while running:
         if bomb.moving == True:
             bomb_group.draw(screen)
 
+        # Drawing the explosion:
+        if bombHit == True:
+            explosion.animate(lastBombPosition)
+            if explosion.displayNumber == 12:
+                bombHit = False
+
         # Displaying names and health:
         text.displayHealthAndName(WHITE, player_1, screen, screen_size)
         text.displayHealthAndName(WHITE, player_2, screen, screen_size)
 
         # Updates stuff:
         bomb.update()
+        explosion_group.draw(screen)
         player_1.gravityFall()
         player_2.gravityFall()
         pygame.display.update()

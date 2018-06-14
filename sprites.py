@@ -6,6 +6,7 @@ import class_player as player
 import class_button as button
 import class_terrain as terrain
 import class_actionBar as actionBar
+import class_explosion as explosion
 import class_background as background
 import class_bombDisplay as bombDisplay
 
@@ -169,7 +170,7 @@ bomb_group.add(bomb_pokeball)
 
 # Explosion animation:
 explosionFrames = []
-for counter in range(1, 13):
+for counter in range(1, 14):
     imagePath = 'Sprites/Explosion/Explosion_' + str(counter) + '.png'
     image = pygame.image.load(imagePath)
     rect = image.get_rect()
@@ -177,3 +178,7 @@ for counter in range(1, 13):
 
     image = pygame.transform.scale(image, new_scale)
     explosionFrames.append(image)
+
+explosion = explosion.Explosion(explosionFrames)
+explosion_group = pygame.sprite.Group()
+explosion_group.add(explosion)
