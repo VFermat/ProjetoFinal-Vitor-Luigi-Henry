@@ -119,6 +119,8 @@ button_group = pygame.sprite.Group()
 
 start_button = button.Button("Sprites/Buttons/Start_Button.png", screen_size, 1, "center_top3")
 button_group.add(start_button)
+settings_button = button.Button("Sprites/Buttons/Settings_Button.png", screen_size, 1, "center_top")
+# button_group.add(settings_button)
 exit_button = button.Button("Sprites/Buttons/Exit_Button.png", screen_size, 1, "center_bottom2")
 button_group.add(exit_button)
 
