@@ -155,7 +155,7 @@ while running:
             else:
                 player_2.standing = False
 
-            if pygame.sprite.spritecollide(bomb, terrain.terrain_group, False):
+            if pygame.sprite.spritecollide(bomb, terrain.terrain_group, True):
                 lastBombPosition = bomb.rect.center
                 bombHit = True
                 bomb.stop_movement()
@@ -196,7 +196,7 @@ while running:
                         bomb = bomb_crash
                         bomb_group.empty()
                         bomb_group.add(bomb_crash)
-                
+
                 # Checks if the key pressed was the number 2:
                 if event.key == pygame.K_2:
                     if bomb.moving == False:
@@ -217,7 +217,7 @@ while running:
                         bomb = bomb_crazy
                         bomb_group.empty()
                         bomb_group.add(bomb_crazy)
-                        
+
                 # Checks if the key pressed was the number 5:
                 if event.key == pygame.K_5:
                     if bomb.moving == False:
@@ -309,7 +309,7 @@ while running:
                 selectorPos = (round(actionBar.slot1[0]), round(actionBar.slot1[1]))
                 selectorRadius = round(actionBar.rect.height/2.5)
                 pygame.draw.circle(screen, BLUE, selectorPos, selectorRadius, 2)
-                
+
             elif bomb.name == "pokeball":
                 selectorPos = (round(actionBar.slot2[0]), round(actionBar.slot2[1]))
                 selectorRadius = round(actionBar.rect.height/2.5)
@@ -342,18 +342,19 @@ while running:
             explosion.animate(lastBombPosition)
             if explosion.displayNumber == 12:
                 bombHit = False
+        explosion_group.draw(screen)
 
         # Displaying names and health:
         text.displayHealthAndName(WHITE, player_1, screen, screen_size)
         text.displayHealthAndName(WHITE, player_2, screen, screen_size)
-        
-        # Displaying Movements Left:
+
+        # Displaying movements left:
         if playerTurn == "1":
             text.displayMovementsLeft(WHITE, screen, 30 - player_1.movements)
         elif playerTurn == "2":
             text.displayMovementsLeft(WHITE, screen, 30 - player_2.movements)
-        
-        # DIsplaying bomb's speed and angle
+
+        # Displaying bomb's speed and angle:
         if playerTurn == "1":
             speed = round(get_distance(player_1.rect.center, mousePosition), 2)
             if speed > bomb.maxSpeed:
@@ -369,7 +370,6 @@ while running:
 
         # Updates stuff:
         bomb.update()
-        explosion_group.draw(screen)
         player_1.gravityFall()
         player_2.gravityFall()
         pygame.display.update()
