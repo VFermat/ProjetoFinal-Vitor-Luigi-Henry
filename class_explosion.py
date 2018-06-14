@@ -14,11 +14,7 @@ class Explosion(pygame.sprite.Sprite):
         self.totalFrames = len(self.explosionFrames)
         self.frame = -1
         self.displayNumber = 0
-
-<<<<<<< HEAD
-
-=======
->>>>>>> d8e63d3913162865ce54106c55393941b8debf3b
+        
         # Sets initial sprite:
         self.image = self.explosionFrames[0]
         self.rect = self.image.get_rect()
@@ -64,10 +60,7 @@ class Explosion(pygame.sprite.Sprite):
 
         if self.frame > 37:
             self.frame = -1
-<<<<<<< HEAD
             self.displayNumber = 12
-=======
->>>>>>> d8e63d3913162865ce54106c55393941b8debf3b
 
         self.frame += 1
 

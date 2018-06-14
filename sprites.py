@@ -78,34 +78,34 @@ actionBar_group = pygame.sprite.Group()
 actionBar_group.add(actionBar)
 
 # Bomb 1:
+iconCrashball = bombDisplay.BombDisplay("Sprites/bomba_crash.png", iconCrashballScale)
+iconCrashball.rect.center = actionBar.slot1
+
+actionBar_group.add(iconCrashball)
+
+# Bomb 2:
 iconPokeball = bombDisplay.BombDisplay("Sprites/pokeball.png", iconPokeballScale)
-iconPokeball.rect.center = actionBar.slot1
+iconPokeball.rect.center = actionBar.slot2
 
 actionBar_group.add(iconPokeball)
 
-# Bomb 2:
+# Bomb 3:
 iconPurpleball = bombDisplay.BombDisplay("Sprites/Purple_Ball_50x50.png", iconPurpleballScale)
-iconPurpleball.rect.center = actionBar.slot2
+iconPurpleball.rect.center = actionBar.slot3
 
 actionBar_group.add(iconPurpleball)
 
-# Bomb 3:
+# Bomb 4:
 iconCrazyball = bombDisplay.BombDisplay("Sprites/bomba_loca.png", iconCrazyballScale)
-iconCrazyball.rect.center = actionBar.slot3
+iconCrazyball.rect.center = actionBar.slot4
 
 actionBar_group.add(iconCrazyball)
 
-# Bomb 4:
+# Bomb 5:
 iconNeutronball = bombDisplay.BombDisplay("Sprites/grav_bomb.png", iconNeutronballScale)
-iconNeutronball.rect.center = actionBar.slot4
+iconNeutronball.rect.center = actionBar.slot5
 
 actionBar_group.add(iconNeutronball)
-
-# Bomb 5:
-iconCrashball = bombDisplay.BombDisplay("Sprites/bomba_crash.png", iconCrashballScale)
-iconCrashball.rect.center = actionBar.slot5
-
-actionBar_group.add(iconCrashball)
 
 # Terrain:
 terrain = terrain.Terrain("Sprites/DirtBlock_70x70.png", blockScale, screen_size, smooth_factor)
@@ -119,8 +119,6 @@ button_group = pygame.sprite.Group()
 
 start_button = button.Button("Sprites/Buttons/Start_Button.png", screen_size, 1, "center_top3")
 button_group.add(start_button)
-settings_button = button.Button("Sprites/Buttons/Settings_Button.png", screen_size, 1, "center_top")
-button_group.add(settings_button)
 exit_button = button.Button("Sprites/Buttons/Exit_Button.png", screen_size, 1, "center_bottom2")
 button_group.add(exit_button)
 
@@ -166,7 +164,7 @@ bomb_neutron = bomb.Bomb(screen_size,
                          50)
 
 bomb_group = pygame.sprite.Group()
-bomb_group.add(bomb_pokeball)
+bomb_group.add(bomb_crash)
 
 # Explosion animation:
 explosionFrames = []
@@ -180,8 +178,5 @@ for counter in range(1, 14):
     explosionFrames.append(image)
 
 explosion = explosion.Explosion(explosionFrames)
-<<<<<<< HEAD
 explosion_group = pygame.sprite.Group()
 explosion_group.add(explosion)
-=======
->>>>>>> d8e63d3913162865ce54106c55393941b8debf3b

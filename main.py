@@ -29,9 +29,7 @@ clock = pygame.time.Clock()
 spriteCount = 0
 
 # Bomb settings:
-bomb = bomb_pokeball
-
-bombHit = None
+bomb = bomb_crash
 
 # MAIN LOOP
 # ==============================================================================
@@ -195,34 +193,37 @@ while running:
                 # Checks if the key pressed was the number 1:
                 if event.key == pygame.K_1:
                     if bomb.moving == False:
+                        bomb = bomb_crash
+                        bomb_group.empty()
+                        bomb_group.add(bomb_crash)
+                
+                # Checks if the key pressed was the number 2:
+                if event.key == pygame.K_2:
+                    if bomb.moving == False:
                         bomb = bomb_pokeball
                         bomb_group.empty()
                         bomb_group.add(bomb_pokeball)
 
-                # Checks if the key pressed was the number 2:
-                if event.key == pygame.K_2:
+                # Checks if the key pressed was the number 3:
+                if event.key == pygame.K_3:
                     if bomb.moving == False:
                         bomb = bomb_purpleball
                         bomb_group.empty()
                         bomb_group.add(bomb_purpleball)
 
-                if event.key == pygame.K_3:
+                # Checks if the key pressed was the number 4:
+                if event.key == pygame.K_4:
                     if bomb.moving == False:
                         bomb = bomb_crazy
                         bomb_group.empty()
                         bomb_group.add(bomb_crazy)
-
-                if event.key == pygame.K_4:
+                        
+                # Checks if the key pressed was the number 5:
+                if event.key == pygame.K_5:
                     if bomb.moving == False:
                         bomb = bomb_neutron
                         bomb_group.empty()
                         bomb_group.add(bomb_neutron)
-
-                if event.key == pygame.K_5:
-                    if bomb.moving == False:
-                        bomb = bomb_crash
-                        bomb_group.empty()
-                        bomb_group.add(bomb_crash)
 
         # Players turn:
         if playerTurn == "1":
@@ -258,12 +259,6 @@ while running:
                     playerTurn = "2"
                     done = True
 
-            speed = round(get_distance(player_1.rect.center, mousePosition), 2)
-            if speed > bomb.maxSpeed:
-                speed = bomb.maxSpeed
-            angle = round(get_angle(player_1.rect.center, mousePosition, "degrees"), 2)
-            text.displayDistance(WHITE, screen, speed, angle, mousePosition)
-
         elif playerTurn == "2":
             # If pressed key is RIGHT arrow:
             if pressed_keys[K_RIGHT] and not bomb.moving:
@@ -297,13 +292,6 @@ while running:
                     playerTurn = "1"
                     done = True
 
-            # Blits distance:
-            speed = round(get_distance(player_2.rect.center, mousePosition), 2)
-            if speed > bomb.maxSpeed:
-                speed = bomb.maxSpeed
-            angle = round(get_angle(player_2.rect.center, mousePosition, "degrees"), 2)
-            text.displayDistance(WHITE, screen, speed, angle, mousePosition)
-
         # Drawing the background:
         screen.blit(background.image, (0, 0))
 
@@ -315,27 +303,27 @@ while running:
 
         # Draws bomb selection indicator:
         if showBombSelector == True:
-            if bomb.name == "pokeball":
+            if bomb.name == "crash":
                 selectorPos = (round(actionBar.slot1[0]), round(actionBar.slot1[1]))
                 selectorRadius = round(actionBar.rect.height/2.5)
                 pygame.draw.circle(screen, BLUE, selectorPos, selectorRadius, 2)
-
-            elif bomb.name == "purpleball":
+                
+            elif bomb.name == "pokeball":
                 selectorPos = (round(actionBar.slot2[0]), round(actionBar.slot2[1]))
                 selectorRadius = round(actionBar.rect.height/2.5)
                 pygame.draw.circle(screen, BLUE, selectorPos, selectorRadius, 2)
 
-            elif bomb.name == "crazy":
+            elif bomb.name == "purpleball":
                 selectorPos = (round(actionBar.slot3[0]), round(actionBar.slot3[1]))
                 selectorRadius = round(actionBar.rect.height/2.5)
                 pygame.draw.circle(screen, BLUE, selectorPos, selectorRadius, 2)
 
-            elif bomb.name == "neutron":
+            elif bomb.name == "crazy":
                 selectorPos = (round(actionBar.slot4[0]), round(actionBar.slot4[1]))
                 selectorRadius = round(actionBar.rect.height/2.5)
                 pygame.draw.circle(screen, BLUE, selectorPos, selectorRadius, 2)
 
-            elif bomb.name == "crash":
+            elif bomb.name == "neutron":
                 selectorPos = (round(actionBar.slot5[0]), round(actionBar.slot5[1]))
                 selectorRadius = round(actionBar.rect.height/2.5)
                 pygame.draw.circle(screen, BLUE, selectorPos, selectorRadius, 2)
@@ -350,15 +338,26 @@ while running:
         # Drawing the explosion:
         if bombHit == True:
             explosion.animate(lastBombPosition)
-<<<<<<< HEAD
             if explosion.displayNumber == 12:
                 bombHit = False
-=======
->>>>>>> d8e63d3913162865ce54106c55393941b8debf3b
 
         # Displaying names and health:
         text.displayHealthAndName(WHITE, player_1, screen, screen_size)
         text.displayHealthAndName(WHITE, player_2, screen, screen_size)
+        
+        # DIsplaying bomb's speed and angle
+        if playerTurn == "1":
+            speed = round(get_distance(player_1.rect.center, mousePosition), 2)
+            if speed > bomb.maxSpeed:
+                speed = bomb.maxSpeed
+            angle = round(get_angle(player_1.rect.center, mousePosition, "degrees"), 2)
+            text.displayDistance(WHITE, screen, speed, angle, mousePosition)
+        elif playerTurn == "2":
+            speed = round(get_distance(player_2.rect.center, mousePosition), 2)
+            if speed > bomb.maxSpeed:
+                speed = bomb.maxSpeed
+            angle = round(get_angle(player_2.rect.center, mousePosition, "degrees"), 2)
+            text.displayDistance(WHITE, screen, speed, angle, mousePosition)
 
         # Updates stuff:
         bomb.update()
