@@ -156,9 +156,11 @@ while running:
                 player_2.standing = False
 
             if pygame.sprite.spritecollide(bomb, terrain.terrain_group, True):
-                lastBombPosition = bomb.rect.center
-                bombHit = True
-                bomb.stop_movement()
+                bomb.rect.y += 10
+                if pygame.sprite.spritecollide(bomb, terrain.terrain_group, True):
+                    lastBombPosition = bomb.rect.center
+                    bombHit = True
+                    bomb.stop_movement()
 
         # Gets mouse position:
         mousePosition = pygame.mouse.get_pos()
